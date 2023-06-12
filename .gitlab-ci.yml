@@ -18,8 +18,6 @@ maven_build:
     - mvn install:install-file -Dfile=target/ExpenseNest-0.0.1-SNAPSHOT.jar -DgroupId=expensenest -DartifactId=expensenest -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar
   script:
     - mvn clean install
-  paths:
-    - target/*.war
 
 
 local_docker_build:
@@ -31,7 +29,6 @@ local_docker_build:
     - docker info
     - docker build -t $IMAGE_NAME .
     - docker save $IMAGE_NAME > $IMAGE_NAME.tar
-  artifacts:
   paths:
     - $IMAGE_NAME.tar
 
