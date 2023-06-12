@@ -1,43 +1,48 @@
-# This is a sample .gitlab-ci.yml file for a GitLab CI/CD pipeline
-# that uses stages, scripts with echo commands, and tags to associate
-# a specific runner called 'jinal_dal_runner'.
-
-
+variables:
+  IMAGE_NAME: expensenest
+services:
+  - name: docker:dind
+cache:
+ paths:
+  - .m2/repository
 
 stages:
-  - build
-  - test
+  - maven_build
+  - docker_build
   - deploy
 
-
-
-# Define the build job
-build_job:
-  stage: build
+maven_build:
+  image: openjdk:20-jdk
+  stage: maven_build
+  before_script:
+    - mvn install:install-file -Dfile=target/ExpenseNest-0.0.1-SNAPSHOT.jar -DgroupId=expensenest -DartifactId=expensenest -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar
   script:
-    - echo "Building the code..."
-    - echo "Build complete!"
+    - mvn clean install
+  artifacts:
+  paths:
+    - target/*.war
+
+
+local_docker_build:
+  image: docker:dind
+  stage: docker_build
   tags:
-    - jinal_dal_runner
-
-
-
-# Define the test job
-test_job:
-  stage: test
+    - group-03-runner
   script:
-    - echo "Running tests..."
-    - echo "Tests completed!"
-  tags:
-    - jinal_dal_runner
+    - docker info
+    - docker build -t $IMAGE_NAME .
+    - docker save $IMAGE_NAME > $IMAGE_NAME.tar
+  artifacts:
+  paths:
+    - $IMAGE_NAME.tar
 
-
-
-# Define the deployment job
-deploy_job:
+deploy_to_local_docker:
+  image: docker:dind
   stage: deploy
-  script:
-    - echo "Deploying to production..."
-    - echo "Deployment complete!"
   tags:
-    - jinal_dal_runner
+    - group-03-runner
+  script:
+    - docker load < $IMAGE_NAME.tar
+    - CONTAINER_ID=$(docker ps -q -a -f "expose=8080")
+    - if [ -n "$CONTAINER_ID" ]; then docker stop $CONTAINER_ID && docker rm $CONTAINER_ID; fi
+    - docker run -d -p 8080:8080 $IMAGE_NAME
