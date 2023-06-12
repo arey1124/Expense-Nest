@@ -29,8 +29,6 @@ local_docker_build:
     - docker info
     - docker build -t $IMAGE_NAME .
     - docker save $IMAGE_NAME > $IMAGE_NAME.tar
-  paths:
-    - $IMAGE_NAME.tar
 
 deploy_to_local_docker:
   image: docker:dind
