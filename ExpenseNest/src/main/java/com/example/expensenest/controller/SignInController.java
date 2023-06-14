@@ -1,10 +1,8 @@
 package com.example.expensenest.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -16,22 +14,22 @@ public class SignInController {
 //    }
 
     @GetMapping("/signin")
-    public ModelAndView showLoginForm(String message, String messageType) {
-        ModelAndView modelAndView = new ModelAndView("signin");
-        modelAndView.addObject("message", message);
-        modelAndView.addObject("messageType", messageType);
-        return modelAndView;
+    public ModelAndView signInForm(String signInMessage, String isSignInSuccess) {
+        ModelAndView signInMV = new ModelAndView("signin");
+        signInMV.addObject("signInMessage", signInMessage);
+        signInMV.addObject("isSignInSuccess", isSignInSuccess);
+        return signInMV;
     }
 
     @PostMapping("/signinpost")
-    public ModelAndView login(String email, String password) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView checkSignIn(String email, String password) {
+        ModelAndView checkSignInMV = new ModelAndView();
         if(email.equals("jinal@gmail.com") && password.equals("testing")) {
-            modelAndView.setViewName("redirect:/signin?message=Login successful!&messageType=success");
+            checkSignInMV.setViewName("redirect:/signin?signInMessage=Login successful!&isSignInSuccess=success");
         } else {
-            modelAndView.setViewName("redirect:/signin?message=Invalid username or password. Please try again.&messageType=error");
+            checkSignInMV.setViewName("redirect:/signin?signInMessage=Invalid username or password. Please try again.&isSignInSuccess=error");
         }
-        return modelAndView;
+        return checkSignInMV;
     }
 
 }

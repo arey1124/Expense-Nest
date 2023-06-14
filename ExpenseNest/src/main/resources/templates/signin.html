@@ -20,7 +20,7 @@
     </nav>
     <div class="form">
         <h1 class="form-title">Sign In</h1>
-        <div id="message" class="text-center"></div> <!-- Message container -->
+        <div id="signInMessage" class="text-center"></div> 
 
         <form action="/signinpost" method="post">
         <div class="input-group">
@@ -66,33 +66,33 @@
 <script>
     $(document).ready(function() {
       var urlParams = new URLSearchParams(window.location.search);
-      var message = urlParams.get('message');
-      var messageType = urlParams.get('messageType');
+      var signInMessage = urlParams.get('signInMessage');
+      var isSignInSuccess = urlParams.get('isSignInSuccess');
 
-      if (message && messageType) {
-        showMessage(message, messageType);
+      if (signInMessage && isSignInSuccess) {
+        showsignInMessage(signInMessage, isSignInSuccess);
       }
 
-      function showMessage(message, type) {
-        var messageDiv = $('#message');
-        messageDiv.text(message);
-        messageDiv.addClass('alert');
+      function showsignInMessage(signInMessage, type) {
+        var signInMessageDiv = $('#signInMessage');
+        signInMessageDiv.text(signInMessage);
+        signInMessageDiv.addClass('alert');
 
         if (type === 'success') {
-          messageDiv.addClass('alert-success');
+          signInMessageDiv.addClass('alert-success');
         } else if (type === 'error') {
-          messageDiv.addClass('alert-danger');
+          signInMessageDiv.addClass('alert-danger');
         }
 
-        messageDiv.fadeIn(300);
+        signInMessageDiv.fadeIn(500);
 
         setTimeout(function() {
-          messageDiv.fadeOut(300, function() {
-            messageDiv.removeClass('alert');
-            messageDiv.removeClass('alert-success');
-            messageDiv.removeClass('alert-danger');
+          signInMessageDiv.fadeOut(500, function() {
+            signInMessageDiv.removeClass('alert');
+            signInMessageDiv.removeClass('alert-success');
+            signInMessageDiv.removeClass('alert-danger');
           });
-        }, 3000);
+        }, 5000);
       }
     });
   </script>
