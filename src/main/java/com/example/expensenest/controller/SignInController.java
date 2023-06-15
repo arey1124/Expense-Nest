@@ -7,14 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class SignInController {
-//    @GetMapping("/signin")
-//    public String getSignInPage (Model model) {
-//        model.addAttribute("signin", null);
-//        return "signin";
-//    }
 
     @GetMapping("/signin")
-    public ModelAndView signInForm(String signInMessage, String isSignInSuccess) {
+    public ModelAndView getSignInForm(String signInMessage, String isSignInSuccess) {
         ModelAndView signInMV = new ModelAndView("signin");
         signInMV.addObject("signInMessage", signInMessage);
         signInMV.addObject("isSignInSuccess", isSignInSuccess);
