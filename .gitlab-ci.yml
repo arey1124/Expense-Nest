@@ -39,6 +39,7 @@ package_job:
     - mvn package
 
 deploy_job:
+  image: jelastic/maven:3.8.6-openjdk-20.ea-b24
   stage: deploy
   artifacts:
     paths:
