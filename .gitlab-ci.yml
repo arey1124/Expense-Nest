@@ -1,42 +1,51 @@
+
+
 variables:
   IMAGE_NAME: expensenest
+
 services:
   - name: docker:dind
+
 cache:
- paths:
-  - .m2/repository
+  paths:
+    - .m2/repository
 
 stages:
-  - maven_build
-  - docker_build
+  - build
+  - test
+  - package
   - deploy
 
-maven_build:
-  image: openjdk:20-jdk
-  stage: maven_build
-  before_script:
-    - mvn install:install-file -Dfile=target/ExpenseNest-0.0.1-SNAPSHOT.jar -DgroupId=expensenest -DartifactId=expensenest -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar
+build_job:
+  image: jelastic/maven:3.8.6-openjdk-20.ea-b24
+  stage: build
   script:
     - mvn clean install
+    - mvn compile
 
-
-local_docker_build:
-  image: docker:dind
-  stage: docker_build
-  tags:
-    - group-03-runner
+test_job:
+  image: jelastic/maven:3.8.6-openjdk-20.ea-b24
+  stage: test
   script:
-    - docker info
-    - docker build -t $IMAGE_NAME .
-    - docker save $IMAGE_NAME > $IMAGE_NAME.tar
+    - mvn test
 
-deploy_to_local_docker:
-  image: docker:dind
+package_job:
+  image: jelastic/maven:3.8.6-openjdk-20.ea-b24
+  stage: package
+  script:
+    - mvn package
+
+deploy_job:
+  image: jelastic/maven:3.8.6-openjdk-20.ea-b24
   stage: deploy
-  tags:
-    - group-03-runner
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )'
+    - eval $(ssh-agent -s)
+    - echo "$PEM_FILE" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $EC2_HOST >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
   script:
-    - docker load < $IMAGE_NAME.tar
-    - CONTAINER_ID=$(docker ps -q -a -f "expose=8080")
-    - if [ -n "$CONTAINER_ID" ]; then docker stop $CONTAINER_ID && docker rm $CONTAINER_ID; fi
-    - docker run -d -p 8080:8080 $IMAGE_NAME
+    - scp -o StrictHostKeyChecking=no target/ExpenseNest-0.0.1-SNAPSHOT.jar ec2-user@ec2-34-216-203-228.us-west-2.compute.amazonaws.com:~
+    - ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-216-203-228.us-west-2.compute.amazonaws.com "java ExpenseNest-0.0.1-SNAPSHOT.jar > ExpenseNest-0.0.1-SNAPSHOT.log &"
