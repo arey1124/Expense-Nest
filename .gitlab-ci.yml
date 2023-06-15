@@ -19,6 +19,9 @@ stages:
 build_job:
   image: jelastic/maven:3.8.6-openjdk-20.ea-b24
   stage: build
+  artifacts:
+    paths:
+      - target
   script:
     - mvn clean install
     - mvn compile
@@ -36,8 +39,10 @@ package_job:
     - mvn package
 
 deploy_job:
-  image: jelastic/maven:3.8.6-openjdk-20.ea-b24
   stage: deploy
+  artifacts:
+    paths:
+      - target
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )'
     - eval $(ssh-agent -s)
