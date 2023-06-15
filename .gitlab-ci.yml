@@ -11,7 +11,40 @@ cache:
     - .m2/repository
 
 stages:
+  - build
+  - test
+  - package
   - deploy
+
+build_job:
+  image: jelastic/maven:3.8.6-openjdk-20.ea-b24
+  stage: build
+  artifacts:
+    paths:
+      - target
+  script:
+    - mvn clean install
+    - mvn compile
+
+test_job:
+  image: jelastic/maven:3.8.6-openjdk-20.ea-b24
+  stage: test
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/tests/TEST_*.xml
+  script:
+    - mvn test
+
+package_job:
+  image: jelastic/maven:3.8.6-openjdk-20.ea-b24
+  stage: package
+  artifacts:
+    paths:
+      - target
+  script:
+    - mvn package
 
 deploy_job:
   image: jelastic/maven:3.8.6-openjdk-20.ea-b24
@@ -20,7 +53,6 @@ deploy_job:
     paths:
       - target
   before_script:
-    - mvn clean install
     - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )'
     - eval $(ssh-agent -s)
     - echo "$PEM_FILE" | tr -d '\r' | ssh-add -
