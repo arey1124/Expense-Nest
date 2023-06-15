@@ -11,9 +11,9 @@ cache:
     - .m2/repository
 
 stages:
-  - build
-  - test
-  - package
+#  - build
+#  - test
+#  - package
   - deploy
 
 build_job:
@@ -45,6 +45,7 @@ deploy_job:
     paths:
       - target
   before_script:
+    - mvn clean install
     - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )'
     - eval $(ssh-agent -s)
     - echo "$PEM_FILE" | tr -d '\r' | ssh-add -
