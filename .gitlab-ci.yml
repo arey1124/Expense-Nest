@@ -11,9 +11,6 @@ cache:
     - .m2/repository
 
 stages:
-#  - build
-#  - test
-#  - package
   - deploy
 
 build_job:
