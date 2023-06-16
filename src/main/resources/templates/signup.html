@@ -17,23 +17,24 @@
 <div class="form">
     <h1 class="form_title">Sign Up</h1>
 
-    <div class="input-group mb3">
-        <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
-        <input type="text" class="form-control" id="name" placeholder="Name">
-    </div>
+    <form th:action="@{/user/create}" th:object="${user}" method="POST">
+        <div class="input-group mb3">
+            <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
+            <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}">
+        </div>
 
-    <div class="input-group mb3">
-        <span class="input-group-text"><i class="fa-regular fa-envelope"></i></span>
-        <input type="text" class="form-control" id="email" placeholder="Email">
-    </div>
+        <div class="input-group mb3">
+            <span class="input-group-text"><i class="fa-regular fa-envelope"></i></span>
+            <input type="text" class="form-control" id="email" placeholder="Email" th:field="*{email}">
+        </div>
 
-    <div class="input-group mb3">
-        <span class="input-group-text"><i class="fa fa-phone"></i></span>
-        <input type="text" class="form-control" id="phone" placeholder="Phone Number">
-    </div>
+        <div class="input-group mb3">
+            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+            <input type="text" class="form-control" id="phone" placeholder="Phone Number" th:field="*{phoneNumber}">
+        </div>
 
-    <button type="button" class="btn btn-submit">SIGN UP</button>
-
+        <button type="submit" class="btn btn-submit">SIGN UP</button>
+    </form>
     <div class="login-redirect">
         <a href="#">Already a user? Login</a>
     </div>
