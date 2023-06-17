@@ -18,7 +18,7 @@ USE `expensenest` ;
 -- Table `expensenest`.`Company`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expensenest`.`Company` (
-   `id` INT NOT NULL,
+   `id` INT NOT NULL AUTO_INCREMENT,
    `name` VARCHAR(60) NULL,
     `address` VARCHAR(100) NULL,
     `phoneNumber` VARCHAR(20) NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `expensenest`.`Company` (
 -- Table `expensenest`.`User`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expensenest`.`User` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(60) NULL,
     `email` VARCHAR(75) NULL,
     `password` VARCHAR(45) NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `expensenest`.`User` (
 -- Table `expensenest`.`Receipt`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expensenest`.`Receipt` (
-   `id` INT NOT NULL,
+   `id` INT NOT NULL AUTO_INCREMENT,
    `userId` INT NULL,
    `sellerId` INT NULL,
    `totalAmount` INT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `expensenest`.`Receipt` (
 -- Table `expensenest`.`Category`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expensenest`.`Category` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(60) NULL,
     `image` VARCHAR(100) NULL,
     PRIMARY KEY (`id`))
@@ -91,7 +91,7 @@ ENGINE = InnoDB;
 -- Table `expensenest`.`Products`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expensenest`.`Products` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(45) NULL,
     `price` INT NULL,
     `category` INT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `expensenest`.`Products` (
 -- Table `expensenest`.`ReceiptItems`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expensenest`.`ReceiptItems` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `receiptId` INT NULL,
     `productId` INT NULL,
     `quantity` INT NULL,

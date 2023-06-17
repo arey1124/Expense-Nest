@@ -61,5 +61,5 @@ deploy_job:
     - ssh-keyscan $EC2_HOST >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - scp -o StrictHostKeyChecking=no target/ExpenseNest-0.0.1-SNAPSHOT.jar ec2-user@ec2-34-216-203-228.us-west-2.compute.amazonaws.com:~
-    - ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-216-203-228.us-west-2.compute.amazonaws.com "java ExpenseNest-0.0.1-SNAPSHOT.jar > ExpenseNest-0.0.1-SNAPSHOT.log &"
+    - scp -o StrictHostKeyChecking=no target/ExpenseNest-0.0.1-SNAPSHOT.jar $USER@$EC2_HOST:~
+    - ssh -o StrictHostKeyChecking=no $USER@$EC2_HOST "nohup java ExpenseNest-*-SNAPSHOT.jar > ExpenseNest-*-SNAPSHOT.log &"
