@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link href="/css/dashboard.css" rel="stylesheet" />
+
+    <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="invoices row" >
+        <div class="card mb-6" style="max-width: 25rem;" th:each="invoice: ${invoices}">
+            <div class="card-header bg-transparent">
+                Invoice
+                <img src="/images/logo.png" height="65" width="53"/>
+            </div>
+            <div class="card-body row">
+                <div class="col-sm-6">
+                    <b>Billed To</b><br>
+                </div>
+                <div class="col-sm-6">
+                    Invoice No.<br>
+                    <span th:text="${invoice.id}"></span><br>
+                    Date<br>
+                    <span th:text="${invoice.purchaseDate}"></span><br>
+                </div>
+                <hr class="divider">
+                <div class="row product-header">
+                    <div class="col-sm-5">
+                        Product
+                    </div>
+                    <div class="col-sm-2">
+                        Price
+                    </div>
+                    <div class="col-sm-2">
+                        Qty.
+                    </div>
+                    <div class="col-sm-3">
+                        Amount
+                    </div>
+                </div>
+
+                <div class="row" th:each="item: ${invoice.items}">
+                    <div class="col-sm-5">
+                        <span th:text="${item.product.name}"></span><br>
+                        <span th:text="${item.product.category.name}" class="category"></span>
+                    </div>
+                    <div class="col-sm-2">
+                        $<span th:text="${item.product.price}" class="price"></span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span th:text="${item.quantity}" class="quantity"></span>
+                    </div>
+                    <div class="col-sm-3">
+                        $<span th:text="${item.quantity} * ${item.product.price}" class="total"></span>
+                    </div>
+                    <hr class="divider">
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6">
+                        SubTotal  $<span th:text="${invoice.totalAmount}"></span><br>
+                        Tax  $<span th:text="${invoice.totalAmount} * 15 / 100"></span>
+                        <hr class="divider">
+                        Invoice Total <br>
+                        $<span class="totalAmount" th:text="${invoice.totalAmount} + (${invoice.totalAmount} * 15 / 100)"></span>
+                    </div>
+                </div>
+
+                <div>
+                    Invoice Term <br>
+                    Please pay your invoice by <div class="currentDate"></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        date = new Date();
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        day = date.getDate();
+        document.getElementsByClassName("currentDate").innerHTML = month + "/" + day + "/" + year;
+    </script>
+</body>
+</html>

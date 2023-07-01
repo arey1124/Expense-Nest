@@ -1,0 +1,15 @@
+body {
+    background: #FED89F;
+}
+
+.invoices {
+    font-size: 15px;
+}
+
+.category, .total, .price, .quantity {
+    font-size: 12px;
+}
+
+.currentDate {
+    display: inline;
+}
