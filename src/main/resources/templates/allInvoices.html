@@ -15,19 +15,25 @@
 </head>
 <body>
     <div class="invoices row" >
-        <div class="card mb-6" style="max-width: 25rem;" th:each="invoice: ${invoices}">
-            <div class="card-header bg-transparent">
-                Invoice
-                <img src="/images/logo.png" height="65" width="53"/>
+        <div class="card mb-6" style="max-width: 27rem;" th:each="invoice: ${invoices}">
+            <div class="card-header bg-transparent row">
+                <div class=" col-sm-12 invoice-actions">
+                    <img class="archive-invoice-${invoice.id}" src="/images/archive-icon.png" height="15" width="15"/>
+                    <img class="download-invoice-${invoice.id}" src="/images/download-icon.png" height="15" width="15"/>
+                </div>
+                <div class="col-sm-12">
+                    <span class="invoice-title">Invoice</span>
+                    <img class="logo" src="/images/logo.png" height="40" width="40"/>
+                </div>
             </div>
             <div class="card-body row">
                 <div class="col-sm-6">
                     <b>Billed To</b><br>
                 </div>
-                <div class="col-sm-6">
-                    Invoice No.<br>
+                <div class="col-sm-6 invoice-number-date">
+                    <b>Invoice No.</b><br>
                     <span th:text="${invoice.id}"></span><br>
-                    Date<br>
+                    <b>Date</b><br>
                     <span th:text="${invoice.purchaseDate}"></span><br>
                 </div>
                 <hr class="divider">
@@ -65,18 +71,18 @@
                 <div class="row">
                     <div class="col-sm-6">
                     </div>
-                    <div class="col-sm-6">
-                        SubTotal  $<span th:text="${invoice.totalAmount}"></span><br>
-                        Tax  $<span th:text="${invoice.totalAmount} * 15 / 100"></span>
+                    <div class="col-sm-6 total-div">
+                        <b>SubTotal</b>  $<span class="col-sm-3" th:text="${invoice.totalAmount}"></span><br>
+                        <b>Tax</b>  $<span class="col-sm-3" th:text="${invoice.totalAmount} * 15 / 100"></span>
                         <hr class="divider">
-                        Invoice Total <br>
+                        <b>Invoice Total</b>
                         $<span class="totalAmount" th:text="${invoice.totalAmount} + (${invoice.totalAmount} * 15 / 100)"></span>
                     </div>
                 </div>
 
                 <div>
                     Invoice Term <br>
-                    Please pay your invoice by <div class="currentDate"></p>
+                    Please pay your invoice by <b><span class="currentDate"></span></b>
                 </div>
 
             </div>
@@ -89,7 +95,9 @@
         year = date.getFullYear();
         month = date.getMonth() + 1;
         day = date.getDate();
-        document.getElementsByClassName("currentDate").innerHTML = month + "/" + day + "/" + year;
+        document.querySelectorAll(".currentDate").forEach(item => {
+            item.textContent = month + "/" + day + "/" + year;
+        });
     </script>
 </body>
 </html>
