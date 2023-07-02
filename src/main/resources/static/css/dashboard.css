@@ -6,10 +6,45 @@ body {
     font-size: 15px;
 }
 
+.invoices > .card {
+    margin: 5px;
+}
+
 .category, .total, .price, .quantity {
     font-size: 12px;
 }
 
 .currentDate {
     display: inline;
+}
+
+.logo {
+    float: right;
+}
+
+.total-div {
+    text-align: right;
+}
+
+.product-header {
+    font-weight: 600;
+}
+
+.invoice-number-date {
+    text-align: right;
+}
+
+.card-header {
+    border-bottom: solid;
+}
+
+.invoice-title {
+    font-weight: 600;
+    top: 35px;
+    position: absolute;
+}
+
+.invoice-actions > img {
+    float: right;
+    margin: 5px;
 }
