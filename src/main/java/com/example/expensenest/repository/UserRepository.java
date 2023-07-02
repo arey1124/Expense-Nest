@@ -1,6 +1,7 @@
 package com.example.expensenest.repository;
 
 import com.example.expensenest.entity.User;
+import com.example.expensenest.entity.UserSignIn;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -29,6 +30,14 @@ public class UserRepository {
         return jdbcTemplate.query(sql, new UserRowMapper());
     }
 
+    public User getUserByEmailAndPassword(UserSignIn userSignIn) {
+        String sql = "SELECT * FROM user WHERE email = ? and password = ?";
+        RowMapper<User> rowMapper = new UserRowMapper();
+
+        List<User> users = jdbcTemplate.query(sql,new Object[]{  userSignIn.getEmail(), userSignIn.getPassword()}, rowMapper);
+        return users.isEmpty() ? null : users.get(0);
+    }
+
     private static class UserRowMapper implements RowMapper<User> {
         @Override
         public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
@@ -36,6 +45,7 @@ public class UserRepository {
             user.setId(resultSet.getInt("id"));
             user.setName(resultSet.getString("name"));
             user.setEmail(resultSet.getString("email"));
+            user.setUserType(resultSet.getInt("userType"));
             return user;
         }
     }
