@@ -14,7 +14,7 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-xl">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src="images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block">
             <span class="p-1">ExpenseNest</span></a>
     </nav>
@@ -22,28 +22,29 @@
         <h1 class="form-title">Sign In</h1>
         <div id="signInMessage" class="text-center"></div> 
 
-        <form action="/signinpost" method="post">
+        <form action="/signinpost"  th:object="${userSignIn}" method="post">
+
         <div class="input-group">
             <span class="input-group-text"><i class="fa-regular fa-envelope"></i></span>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Email" required th:field="*{email}">
         </div>
 
         <div class="input-group">
             <span class="input-group-text"><i class="fa fa-lock"></i></span>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required th:field="*{password}">
         </div>
 
         <div class="form-check">
             <div class="row">
                 <div class="col-5">
-                    <input class="form-check-input checkbox-color" type="checkbox" value="" id="remembercreds">
-                    <label class="form-check-label checkbox-color" for="remembercreds">
-                        Remember me
-                    </label>
+<!--                    <input class="form-check-input checkbox-color" type="checkbox" value="" id="remembercreds">-->
+<!--                    <label class="form-check-label checkbox-color" for="remembercreds">-->
+<!--                        Remember me-->
+<!--                    </label>-->
                 </div>
                 <div class="col-1"></div>
                 <div class="col-6 float:right forgot-password">
-                    <a href="#">Forgot password? </a>
+                    <a href="#">Forgot password? </a> <!-- add a link to forgot password page -->
                 </div>
             </div>
         </div>
@@ -51,7 +52,7 @@
         <button type="submit" class="btn btn-submit">SIGN IN</button>
         </form>
         <div class="sign-in">
-            <a href="#">New user? Sign Up</a>
+            <a href="/signup">New user? Sign Up</a>
 
         </div>
     </div>
@@ -97,3 +98,4 @@
     });
   </script>
 </body>
+</html>
