@@ -43,9 +43,6 @@ public class InvoiceRepository {
             invoice.setArchivedReason(resultSet.getString("archivedReason"));
             invoice.setPurchaseDate(resultSet.getString("dateOfPurchase").split(" ")[0]);
             invoice.setItems(invoiceItemsRepository.findItemsByInvoice(resultSet.getInt("id")));
-
-            System.out.println(invoice.getTotalAmount());
-            System.out.println(invoice.getItems().get(0).getProduct().getName());
             return invoice;
         }
     }

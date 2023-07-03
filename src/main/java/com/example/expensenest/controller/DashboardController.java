@@ -1,6 +1,8 @@
 package com.example.expensenest.controller;
 
+import com.example.expensenest.entity.User;
 import com.example.expensenest.service.InvoiceService;
+import com.example.expensenest.service.SessionService;
 import com.example.expensenest.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardController {
 
     private InvoiceService invoiceService;
+    private SessionService sessionService;
 
-    public DashboardController(InvoiceService invoiceService) {
+    public DashboardController(InvoiceService invoiceService, SessionService sessionService) {
         this.invoiceService = invoiceService;
+        this.sessionService = sessionService;
     }
 
     @GetMapping("/dashboard")
@@ -24,7 +28,9 @@ public class DashboardController {
 
     @GetMapping("/invoices")
     public String getAllInvoices (HttpServletRequest request, HttpSession session, Model model) {
-        model.addAttribute("invoices", invoiceService.getUserInvoices(2));
+        User userSession = sessionService.getSession(session);
+        model.addAttribute("invoices", invoiceService.getUserInvoices(userSession.getId()));
+        System.out.println(userSession.getId());
         return "allInvoices";
     }
 }
