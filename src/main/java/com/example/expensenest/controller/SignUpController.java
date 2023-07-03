@@ -30,5 +30,4 @@ public class SignUpController {
         // TODO: Need to redirect to password setup page
         return "redirect:/signup";
     }
-
 }
