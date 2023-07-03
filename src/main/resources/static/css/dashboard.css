@@ -1,50 +1,214 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.1rem;
+}
+
 body {
-    background: #FED89F;
+    min-height: 100vh;
+    background-color: rgb(242, 193, 102);
 }
 
-.invoices {
-    font-size: 15px;
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: white;
+    border-top-right-radius: 25px;
+    box-shadow: 1px 0px 5px gray;
 }
 
-.invoices > .card {
-    margin: 5px;
+nav.menu_items {
+    margin-top: 40px;
+    height: calc(100% - 90px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.category, .total, .price, .quantity {
-    font-size: 12px;
+.menu_items li {
+    list-style: none;
 }
 
-.currentDate {
-    display: inline;
+/* .menu_items li a {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    text-decoration: none;
 }
 
-.logo {
-    float: right;
+.menu_items li a .link_name {
+    font-size: 1.1em;
+    font-weight: 400;
+} */
+
+.menu_items li a {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 25px;
+    color: black;
+    padding-left: 7px;
 }
 
-.total-div {
-    text-align: right;
-}
-
-.product-header {
+.menu_items li a:hover, ul li:nth-child(2){
+    margin-right: 40px;
+    background-color: rgb(242, 193, 102);
+    border-radius: 7px;
     font-weight: 600;
 }
 
-.invoice-number-date {
-    text-align: right;
+/* Style for the active tab */
+.nav_links li a.active {
+    color: #FF0000; /* Set the desired color for the active tab */
 }
 
-.card-header {
-    border-bottom: solid;
-}
-
-.invoice-title {
-    font-weight: 600;
-    top: 35px;
+.logout_btn {
+    background-color: rgb(242, 193, 102);
+    padding: 8px;
+    padding-top: 1%;
+    border-radius: 5px;
+    border-color: rgb(242, 193, 102);
     position: absolute;
+    bottom: 0;
+    margin-bottom: 50px;
+
 }
 
-.invoice-actions > img {
-    float: right;
-    margin: 5px;
+.content {
+    padding-top: 50px;
 }
+
+.content .boxes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 300px;
+    margin-right: 20px;
+}
+
+.content .boxes .box {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    border-radius: 12px;
+    width: calc(100% / 3 - 10px);
+    padding: 15px 12px;
+    background-color: white;
+    /* box-shadow: 0px 2px 5px gray; */
+}
+
+.content .boxes .box .text_light {
+    font-weight: 100;
+    font-size: 0.8em;
+}
+
+.content .boxes .box .text{
+    font-size: 1.5em;
+}
+
+.content .boxes .box .number {
+    margin-top: 10px;
+    font-size: 2.5rem;
+}
+
+.content .boxes .box .percentage {
+    margin-top: 7px;
+    font-size: 0.9em;
+    color: green;
+}
+
+.content .horizontal_boxes {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-left: 300px;
+    margin-right: 20px;
+}
+
+.content .horizontal_boxes .h_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.5em;
+    box-shadow: 0px 1px 5px gray;
+    margin-top: 30px;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.content .horizontal_boxes .h_box .text {
+    font-size: 1.2em;
+    padding-left: 20px;
+}
+
+.content .horizontal_boxes .h_box .number {
+    font-size: 1.2em;
+    padding-right: 20px;
+}
+
+.content .boxes .box:hover, .content .horizontal_boxes .h_box:hover  {
+    box-shadow: 7px 7px 5px gray;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.logout_btn:hover {
+    cursor: pointer;
+    background-color: rgb(219, 151, 23);
+    font-weight: 600;
+}
+
+/* Mobile View */
+@media (max-width: 415px) {
+    nav {
+        width: 100%;
+        padding: 10px;
+        border-top-right-radius: 0;
+        box-shadow: none;
+    }
+
+    .content .boxes, .content .horizontal_boxes {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .content .boxes .box, .content .horizontal_boxes .h_box {
+        width: 100%;
+    }
+}
+
+/* Tablet/iPad view */
+@media (min-width: 768px) and (max-width: 1180px) {
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 250px;
+        padding: 10px 14px;
+        background-color: white;
+        border-top-right-radius: 25px;
+        box-shadow: 1px 0px 5px gray;
+    }
+
+    nav.menu_items {
+        margin-top: 40px;
+        height: calc(100% - 90px);
+    }
+
+    .content .boxes,
+    .content .horizontal_boxes {
+        margin-left: 300px;
+        margin-right: 20px;
+    }
+}
+
