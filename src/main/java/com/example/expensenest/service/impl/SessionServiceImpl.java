@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SessionServiceImpl implements SessionService {
 
-    private static final String Session_Key = "userSignIn";
+    private static final String Session_Key = "loggedInUserData";
 
     @Override
     public void createSession(User user, HttpSession session) {
