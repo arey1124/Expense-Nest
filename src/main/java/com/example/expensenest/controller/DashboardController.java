@@ -17,6 +17,11 @@ public class DashboardController {
         this.invoiceService = invoiceService;
     }
 
+    @GetMapping("/dashboard")
+    public String getUserDashboard (HttpServletRequest request, HttpSession session, Model model) {
+        return "dashboard";
+    }
+
     @GetMapping("/invoices")
     public String getAllInvoices (HttpServletRequest request, HttpSession session, Model model) {
         model.addAttribute("invoices", invoiceService.getUserInvoices(2));
