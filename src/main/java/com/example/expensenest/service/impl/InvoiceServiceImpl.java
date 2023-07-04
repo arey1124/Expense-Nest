@@ -20,4 +20,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     public List<Invoice> getUserInvoices(int userId) {
         return invoiceRepository.findAllUserInvoices(userId);
     }
+
+    @Override
+    public List<Invoice> getFilteredInvoices(int userId, String searchString) {
+        return invoiceRepository.getAllUserFilteredInvoices(userId, searchString);
+    }
 }

@@ -120,3 +120,24 @@ nav.menu_items {
     margin-bottom: 50px;
 
 }
+
+.search-bar {
+    margin: 5px;
+    padding-right: 40px;
+}
+
+.input-group-btn {
+    height: 98%;
+    background: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.search-form {
+    width: 100%;
+    display: inherit;
+}
+.search-text {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}

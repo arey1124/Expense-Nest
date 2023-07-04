@@ -25,6 +25,18 @@ public class InvoiceRepository {
         return jdbcTemplate.query(sql, new InvoiceRowMapper(invoiceItemsRepository));
     }
 
+    public List<Invoice> getAllUserFilteredInvoices(int userId, String searchString) {
+        String sql;
+        if(searchString.matches("-?\\d+")) {
+            sql = "SELECT * FROM Receipt WHERE userId=" + userId +
+                    " AND (id="+ searchString+ " OR dateOfPurchase LIKE '%"+ searchString +"%')";
+        } else {
+            sql = "SELECT * FROM Receipt WHERE userId=" + userId +
+                    " AND (dateOfPurchase LIKE '%"+ searchString +"%')";
+        }
+        return jdbcTemplate.query(sql, new InvoiceRowMapper(invoiceItemsRepository));
+    }
+
     private static class InvoiceRowMapper implements RowMapper<Invoice> {
 
         final InvoiceItemsRepository invoiceItemsRepository;
