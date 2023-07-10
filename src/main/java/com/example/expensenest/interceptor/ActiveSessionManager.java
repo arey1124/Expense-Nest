@@ -22,7 +22,7 @@ public class ActiveSessionManager implements HandlerInterceptor {
         HttpSession session = request.getSession();
         User userSession = sessionService.getSession(session);
         if (userSession != null) {
-            response.sendRedirect("/layout");
+            response.sendRedirect("/dashboard");
             return false;
         }
         return true;
