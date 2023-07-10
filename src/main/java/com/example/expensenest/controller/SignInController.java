@@ -24,7 +24,6 @@ public class SignInController {
     }
 
     @GetMapping("/signin")
-
     public String getSignInForm(Model model, HttpServletRequest httpServletRequest, HttpSession session) {
         UserSignIn signIn = new UserSignIn(null,null);
         model.addAttribute("userSignIn", signIn);
@@ -34,22 +33,16 @@ public class SignInController {
 
     @PostMapping("/signinpost")
     public String checkSignIn(@ModelAttribute("userSignIn") UserSignIn signIn,HttpSession session) {
-
-
         User user = userService.getUserByEmailAndPassword(signIn);
-
-
         if (user != null) {
             sessionService.createSession(user, session);
-
             if (user.getUserType() == 1) {
-
                 return "redirect:/signin";
-//                    TODO: redirect to customer dashboard
+            // TODO: redirect to customer dashboard
 
             } else {
                 return "redirect:/signin";
-//                TODO: redirect to seller dashboard
+            //  TODO: redirect to seller dashboard
             }
         }
         else {
@@ -58,13 +51,14 @@ public class SignInController {
 
     }
 
-//    TODO: Added below controller for verifying logout related functionality, this will be removed later once side-bar navigation panel is implemented
+    // TODO: Added below controller for verifying logout related functionality, this will be removed later once side-bar navigation panel is implemented
     @GetMapping("/layout")
     public String testPage(Model model) {
         UserSignIn signIn = new UserSignIn(null,null);
         model.addAttribute("userSignIn", signIn);
         return "/layout";
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         sessionService.removeSession(session);
