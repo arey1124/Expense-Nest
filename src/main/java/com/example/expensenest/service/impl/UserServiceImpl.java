@@ -4,10 +4,10 @@ import com.example.expensenest.entity.User;
 import com.example.expensenest.entity.UserSignIn;
 import com.example.expensenest.repository.UserRepository;
 import com.example.expensenest.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,8 +28,27 @@ public class UserServiceImpl implements UserService {
         return userRepository.getUserByEmailAndPassword(userSignIn);
     }
 
+    public User findByVerificationCode(String code) {
+        return userRepository.findByVerificationCode(code);
+    }
+
     @Override
-    public boolean addUser(User user) {
-        return userRepository.save(user);
+    public boolean setUserPassword(User user) {
+        return userRepository.setUserPassword(user);
+    }
+    @Override
+    public String addUser(User user) {
+        String verificationCode = generateUserVerificationCode();
+        userRepository.save(user, verificationCode);
+        return verificationCode;
+    }
+
+    public boolean verifyUser(String code) {
+        return userRepository.verify(code);
+    }
+
+    public static String generateUserVerificationCode() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
     }
 }

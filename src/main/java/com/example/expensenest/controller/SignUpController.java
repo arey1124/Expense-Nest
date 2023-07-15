@@ -1,20 +1,23 @@
 package com.example.expensenest.controller;
 
 import com.example.expensenest.entity.User;
+import com.example.expensenest.service.EmailSenderService;
 import com.example.expensenest.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SignUpController {
 
     private UserService userService;
-
-    public SignUpController(UserService userService) {
+private  final EmailSenderService emailSenderService;
+    public SignUpController(UserService userService, EmailSenderService emailSenderService) {
         this.userService = userService;
+        this.emailSenderService = emailSenderService;
     }
 
     @GetMapping("/signup")
@@ -26,7 +29,8 @@ public class SignUpController {
 
     @PostMapping("/user/create")
     public String createUser(@ModelAttribute("user") User user) {
-        userService.addUser(user);
+        String code = userService.addUser(user);
+        emailSenderService.sendVerificationEmail(user.getEmail(), code);
         // TODO: Need to redirect to password setup page
         return "redirect:/signup";
     }
