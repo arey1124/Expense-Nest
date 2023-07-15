@@ -42,9 +42,9 @@
                 </li>
                 <!--        Sign In and Sign Up Buttons    -->
                 <div class="m-2">
-                    <form>
+                    <form th:action="@{/signup}" method="get">
                         <button class="btn btn-orange" type="submit">Sign Up</button>
-                        <button class="btn btn-sign-in" type="submit">Sign In</button>
+                        <a class="btn btn-sign-in" th:href="@{/signin}">Sign In</a>
                     </form>
                 </div>
             </ul>
