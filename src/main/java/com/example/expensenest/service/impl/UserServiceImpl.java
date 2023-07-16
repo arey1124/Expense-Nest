@@ -36,10 +36,21 @@ public class UserServiceImpl implements UserService {
     public boolean setUserPassword(User user) {
         return userRepository.setUserPassword(user);
     }
+
     @Override
     public String addUser(User user) {
+        if(userRepository.checkUserExists(user)) {
+            return null;
+        } else {
+            String code = getVerificationCode();
+            userRepository.save(user, code);
+            return code;
+        }
+
+    }
+
+    public String getVerificationCode() {
         String verificationCode = generateUserVerificationCode();
-        userRepository.save(user, verificationCode);
         return verificationCode;
     }
 

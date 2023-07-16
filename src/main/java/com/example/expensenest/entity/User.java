@@ -23,7 +23,7 @@ public class User {
 
     public User(String email,String password) {
         this.password = password;
-        this.email = password;
+        this.email = email;
     }
 
     public User(int id, String name, String email, String password, String isVerfied, int userType, String phoneNumber, int companyId) {

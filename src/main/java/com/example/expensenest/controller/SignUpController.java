@@ -30,8 +30,11 @@ private  final EmailSenderService emailSenderService;
     @PostMapping("/user/create")
     public String createUser(@ModelAttribute("user") User user) {
         String code = userService.addUser(user);
-        emailSenderService.sendVerificationEmail(user.getEmail(), code);
-        // TODO: Need to redirect to password setup page
-        return "redirect:/signup";
+        if (code == null) {
+            return "redirect:/signin";
+        } else {
+            emailSenderService.sendVerificationEmail(user.getEmail(), code);
+            return "redirect:/signup";
+        }
     }
 }
