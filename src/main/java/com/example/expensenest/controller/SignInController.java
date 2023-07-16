@@ -27,7 +27,6 @@ public class SignInController {
     public String getSignInForm(Model model, HttpServletRequest httpServletRequest, HttpSession session) {
         UserSignIn signIn = new UserSignIn(null,null);
         model.addAttribute("userSignIn", signIn);
-        // TODO: redirect to dashboard when user is already logged in
         return "/signin";
     }
 
@@ -37,8 +36,7 @@ public class SignInController {
         if (user != null) {
             sessionService.createSession(user, session);
             if (user.getUserType() == 1) {
-                return "redirect:/signin";
-            // TODO: redirect to customer dashboard
+                return "redirect:/dashboard";
 
             } else {
                 return "redirect:/signin";

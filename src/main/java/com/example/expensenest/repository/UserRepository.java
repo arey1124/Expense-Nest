@@ -6,9 +6,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserRepository {
@@ -38,6 +41,30 @@ public class UserRepository {
         return users.isEmpty() ? null : users.get(0);
     }
 
+    public User getUserByID(int userId){
+        String sql = "SELECT * FROM user WHERE id = ?";
+        RowMapper<User> rowMapper = new UserRowMapper();
+
+        List<User> users = jdbcTemplate.query(sql,new Object[]{  userId}, rowMapper);
+        return users.isEmpty() ? null : users.get(0);
+    }
+
+    public Boolean saveUserProfile(User userprofile){
+        try {
+            String UPDATE_PROFILE_QUERY = "UPDATE user SET name = ?, phoneNumber = ?, companyId = ? WHERE id = ?";
+            Map<String, Object> editedValues = new HashMap<>();
+            editedValues.put("id", userprofile.getId());
+            editedValues.put("storeName", userprofile.getName());
+            editedValues.put("phoneNumber", userprofile.getPhoneNumber());
+            editedValues.put("storeId", userprofile.getCompanyId());
+
+            int rowsAffected = jdbcTemplate.update(UPDATE_PROFILE_QUERY, new Object[]{userprofile.getName(), userprofile.getPhoneNumber(), userprofile.getCompanyId() > 0 ? userprofile.getCompanyId() : null, userprofile.getId()});
+            return rowsAffected > 0;
+        }catch (Exception ex){
+            return false;
+        }
+    }
+
     private static class UserRowMapper implements RowMapper<User> {
         @Override
         public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
@@ -46,6 +73,8 @@ public class UserRepository {
             user.setName(resultSet.getString("name"));
             user.setEmail(resultSet.getString("email"));
             user.setUserType(resultSet.getInt("userType"));
+            user.setPhoneNumber(resultSet.getString("phoneNumber"));
+            user.setCompanyId(resultSet.getInt("companyId"));
             return user;
         }
     }
