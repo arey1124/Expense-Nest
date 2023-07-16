@@ -16,7 +16,7 @@
 <body>
 <div class="form">
     <h1 class="form_title">Sign Up</h1>
-
+    <h6 th:if="user.isVerified == 0">An email has been sent to your registered email id for verification. Please verify your email to proceed further</h6>
     <form th:action="@{/user/create}" th:object="${user}" method="POST">
         <div class="input-group mb3">
             <span class="input-group-text"><i class="fa-regular fa-user"></i></span>

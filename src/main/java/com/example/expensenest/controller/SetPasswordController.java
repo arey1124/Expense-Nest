@@ -31,8 +31,8 @@ public class SetPasswordController {
     }
 
 
-    @PostMapping("/user/password")
-    public String createPassword(@ModelAttribute("user") User user) {
+    @PostMapping("/setPassword")
+    public String createPassword(@ModelAttribute("userPassword") User user) {
         System.out.println(user.getPassword());
 
         boolean valid = userService.setUserPassword(user);

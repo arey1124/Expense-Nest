@@ -52,11 +52,11 @@ public class UserRepository {
         return users.isEmpty() ? null : users.get(0);
     }
 
-    public User checkUserExists(User user) {
+    public boolean checkUserExists(User user) {
         String sql = "Select * from User where email = ?";
         RowMapper<User> rowMapper = new UserRowMapper();
         List<User> users = jdbcTemplate.query(sql,new Object[]{  user.getEmail()}, rowMapper);
-        return users.isEmpty() ? null : users.get(0);
+        return !users.isEmpty();
     }
 
     public boolean setUserPassword(User user) {
