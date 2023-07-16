@@ -29,7 +29,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserProfile(int userId) {
+        return userRepository.getUserByID(userId);
+    }
+
+    @Override
+    public Boolean setUserProfile(User userprofile) {
+        return userRepository.saveUserProfile(userprofile);
+    }
+
+    @Override
     public boolean addUser(User user) {
         return userRepository.save(user);
     }
+
 }

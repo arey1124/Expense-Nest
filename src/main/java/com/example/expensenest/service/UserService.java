@@ -13,4 +13,7 @@ public interface UserService {
     boolean addUser(User user);
 
     User getUserByEmailAndPassword(UserSignIn userSignIn);
+
+    User getUserProfile(int sellerUserId);
+    Boolean setUserProfile(User userprofile);
 }
