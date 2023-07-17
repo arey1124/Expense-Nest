@@ -37,6 +37,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.setUserPassword(user);
     }
 
+    public boolean setPasswordResetVerificationCode(String code, String email) {
+        return userRepository.setCode(code,email);
+    }
+
     @Override
     public String addUser(User user) {
         if(userRepository.checkUserExists(user)) {
@@ -58,7 +62,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.verify(code);
     }
 
-    public static String generateUserVerificationCode() {
+    @Override
+    public String generateUserVerificationCode() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
     }
