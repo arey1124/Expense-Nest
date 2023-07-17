@@ -33,6 +33,11 @@ public class UserRepository {
         return users.size() > 0 ? users.get(0) : null;
     }
 
+    public boolean setCode(String code, String email) {
+        String sql = "UPDATE User SET verificationCode='" + code + "' where email='"+email+"'";
+        jdbcTemplate.update(sql);
+        return true;
+    }
     public boolean verify(String code) {
         String sql = "UPDATE User SET isVerified=1 where verificationCode='"+code+"'";
         jdbcTemplate.update(sql);
