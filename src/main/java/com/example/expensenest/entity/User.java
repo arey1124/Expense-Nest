@@ -68,7 +68,7 @@ public class User {
     }
 
     public void setIsVerfied(String isVerfied) {
-        this.isVerfied = isVerfied;
+        //this.isgit pullVerfied = isVerfied;
     }
 
     public int getUserType() {

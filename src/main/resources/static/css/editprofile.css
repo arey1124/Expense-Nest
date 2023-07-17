@@ -1,0 +1,218 @@
+body {
+    background: #FED89F;
+}
+
+.invoices {
+    font-size: 15px;
+    margin-left: 280px;
+}
+
+.invoices > .card {
+    margin: 5px;
+}
+
+.category, .total, .price, .quantity {
+    font-size: 12px;
+}
+
+.currentDate {
+    display: inline;
+}
+
+.logo {
+    float: right;
+}
+
+.total-div {
+    text-align: right;
+}
+
+.product-header {
+    font-weight: 600;
+}
+
+.invoice-number-date {
+    text-align: right;
+}
+
+.card-header {
+    border-bottom: solid;
+}
+
+.invoice-title {
+    font-weight: 600;
+    top: 35px;
+    position: absolute;
+}
+
+.invoice-actions > img {
+    float: right;
+    margin: 5px;
+}
+
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: white;
+    border-top-right-radius: 25px;
+    box-shadow: 1px 0px 5px gray;
+}
+
+nav.menu_items {
+    margin-top: 40px;
+    height: calc(100% - 90px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu_items li {
+    list-style: none;
+}
+.menu_items li a {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 25px;
+    color: black;
+    padding-left: 7px;
+}
+
+.menu_items li a:hover, ul li:nth-child(2){
+    margin-right: 40px;
+    background-color: rgb(242, 193, 102);
+    border-radius: 7px;
+    font-weight: 600;
+}
+
+/* Style for the active tab */
+.nav_links li a.active {
+    color: #FF0000; /* Set the desired color for the active tab */
+}
+
+.logout_btn {
+    background-color: rgb(242, 193, 102);
+    padding: 8px;
+    padding-top: 1%;
+    border-radius: 5px;
+    border-color: rgb(242, 193, 102);
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 50px;
+
+}
+
+.search-bar {
+    margin: 5px;
+    padding-right: 40px;
+}
+
+.input-group-btn {
+    height: 98%;
+    background: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.reset_button
+{
+width: 149px;
+  color: rgba(255,111,8,1);
+  position: absolute;
+  padding-left:20px;
+padding-right:20px;
+padding-top:14px;
+padding-bottom:14px;
+/*
+  top: 12px;
+  left: 15px */;
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 16px;
+  opacity: 1;
+  text-align: center;
+}
+.edit-profile-card {
+  margin-top: 40px;
+  margin-left: 280px;
+  width: 500px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.edit-profile-card .card-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+ .profile-picture {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 111px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.profile-image-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: transparent;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  color: #F2A530;
+}
+
+
+
+
+.cancel-btn,
+.reset-password-btn,
+.save-btn {
+  width: 180px;
+  height: 44px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #F5F5F5;
+  background: #F2A530;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-btn:hover,
+.reset-password-btn:hover,
+.save-btn:hover {
+  background: #FF7008;
+}
+
+.cc {
+    display: flex;
+    align-items: center;
+    gap: 400px;
+}
+
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}

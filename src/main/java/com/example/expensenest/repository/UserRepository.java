@@ -25,6 +25,19 @@ public class UserRepository {
         return true;
     }
 
+    public boolean edit(User user) {
+        String sql = "UPDATE user\n" +
+                "SET\n" +
+                "name = ?,\n" +
+                "email = ?,\n" +
+                "phoneNumber = <?,\n" +
+                "isVerified = ?,\n" +
+                "userType = ?,\n" +
+                "WHERE id = ?;";
+        jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPhoneNumber(), 1, 1, user.getId());
+        return true;
+    }
+
     public List<User> findAll() {
         String sql = "SELECT * FROM Users";
         return jdbcTemplate.query(sql, new UserRowMapper());

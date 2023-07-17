@@ -42,4 +42,10 @@ public class DashboardController {
         model.addAttribute("user", userSession);
         return "allInvoices";
     }
+
+    @PostMapping("/editProfile")
+    public String editProfile () {
+
+        return "editprofile";
+    }
 }
