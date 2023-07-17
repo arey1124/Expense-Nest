@@ -12,5 +12,7 @@ public interface UserService {
 
     boolean addUser(User user);
 
+    boolean editUser(User user);
+
     User getUserByEmailAndPassword(UserSignIn userSignIn);
 }
