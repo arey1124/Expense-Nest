@@ -16,6 +16,8 @@ public interface UserService {
 
     boolean verifyUser(String code);
 
+    boolean editUser(User user);
+
     User getUserByEmailAndPassword(UserSignIn userSignIn);
 
     User getUserProfile(int sellerUserId);

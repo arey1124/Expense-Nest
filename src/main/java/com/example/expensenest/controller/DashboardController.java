@@ -84,6 +84,12 @@ public class DashboardController {
         return "allInvoices";
     }
 
+    @PostMapping("/editProfile")
+    public String editProfile () {
+
+        return "editprofile";
+    }
+
     @PostMapping("/archive/{invoiceId}")
     public String archiveInvoices (@PathVariable(value="invoiceId") String invoiceId, @ModelAttribute("archivedReason") String archivedReason) {
         invoiceService.updateInvoiceArchiveData(Integer.valueOf(invoiceId), true, archivedReason);

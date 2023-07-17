@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean editUser(User user) {
+        return userRepository.edit(user);
+    }
+
+    @Override
     public Boolean setUserProfile(User userprofile) {
         logger.info("Setting user profile for userId: {}", userprofile.getId());
         return userRepository.saveUserProfile(userprofile);
