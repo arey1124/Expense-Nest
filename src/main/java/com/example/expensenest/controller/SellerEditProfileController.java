@@ -27,7 +27,7 @@ public class SellerEditProfileController {
         User userSession = sessionService.getSession(session);
         User profile = userService.getUserProfile(userSession.getId());
         model.addAttribute("user", profile);
-        return "/sellerEditProfile";
+        return "/editProfile";
     }
 
     @PostMapping("/saveSeller")
@@ -39,6 +39,6 @@ public class SellerEditProfileController {
         } else {
             model.addAttribute("errorMessage", "Error occurred while saving the profile.");
         }
-        return "sellerEditProfile";
+        return "editProfile";
     }
 }
