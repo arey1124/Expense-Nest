@@ -18,4 +18,7 @@ public interface UserService {
 
     User findByVerificationCode(String code);
     boolean setUserPassword(User user);
+
+    public String generateUserVerificationCode();
+    public boolean setPasswordResetVerificationCode(String code, String email);
 }
