@@ -97,11 +97,12 @@ nav.menu_items {
 .content .boxes .box {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     border-radius: 12px;
     width: calc(100% / 3 - 10px);
     padding: 15px 12px;
     background-color: white;
+
     /* box-shadow: 0px 2px 5px gray; */
 }
 
@@ -112,11 +113,13 @@ nav.menu_items {
 
 .content .boxes .box .text{
     font-size: 1.5em;
+
 }
 
 .content .boxes .box .number {
     margin-top: 10px;
     font-size: 2.5rem;
+
 }
 
 .content .boxes .box .percentage {
@@ -143,6 +146,17 @@ nav.menu_items {
     margin-top: 30px;
     border-radius: 12px;
     background-color: white;
+}
+
+#box_scroll{
+    height: 450px;
+    margin-top: 2%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#box_scroll::-webkit-scrollbar {
+   display: none;
 }
 
 .content .horizontal_boxes .h_box .text {
