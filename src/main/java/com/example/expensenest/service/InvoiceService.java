@@ -8,4 +8,5 @@ import java.util.List;
 @Service
 public interface InvoiceService {
     List<Invoice> getUserInvoices(int userId);
+    List<Invoice> getFilteredInvoices(int userId, String searchString);
 }
