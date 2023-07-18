@@ -43,9 +43,8 @@ public class SignInController {
             sessionService.createSession(user, session);
 
             if (user.getUserType() == 1) {
-
-                return "redirect:/signin";
-//                    TODO: redirect to customer dashboard
+                return "redirect:/dashboard";
+            // TODO: redirect to customer dashboard
 
             } else {
                 return "redirect:/signin";
