@@ -28,6 +28,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.getUserByEmailAndPassword(userSignIn);
     }
 
+    @Override
+    public User getUserProfile(int userId) {
+        return userRepository.getUserByID(userId);
+    }
+
+    @Override
+    public Boolean setUserProfile(User userprofile) {
+        return userRepository.saveUserProfile(userprofile);
+    }
+
     public User findByVerificationCode(String code) {
         return userRepository.findByVerificationCode(code);
     }
@@ -67,4 +77,5 @@ public class UserServiceImpl implements UserService {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
     }
+
 }
