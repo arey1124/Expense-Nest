@@ -17,14 +17,12 @@ public class ActiveSessionManager implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-
         // If the user is signed in, and is trying to access any of the pages (sign up, sign in, and forgot password),
         // then redirect the user to the dashboard page. else continue to the page user is trying to access.
         HttpSession session = request.getSession();
         User userSession = sessionService.getSession(session);
         if (userSession != null) {
-            response.sendRedirect("/layout");
+            response.sendRedirect("/dashboard");
             return false;
         }
         return true;

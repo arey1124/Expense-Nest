@@ -17,8 +17,7 @@ public class InActiveSessionManager implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-       // If the user is not signed in, and he is trying to access any of the pages OTHER THAN (sign up, sign in, and forgot password),
+        // If the user is not signed in, and he is trying to access any of the pages OTHER THAN (sign up, sign in, and forgot password),
         // then redirect the user to sign in page, else continue to the page user is trying to access
         HttpSession session = request.getSession();
         User userSession = sessionService.getSession(session);
