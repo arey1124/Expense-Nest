@@ -1,5 +1,6 @@
 package com.example.expensenest.controller;
 
+import com.example.expensenest.entity.User;
 import com.example.expensenest.service.DashboardService;
 import com.example.expensenest.service.InvoiceService;
 import com.example.expensenest.service.SessionService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class    DashboardController {
 
     private InvoiceService invoiceService;
+    private SessionService sessionService;
     private DashboardService dashboardService;
 
     public DashboardController(InvoiceService invoiceService, DashboardService dashboardService) {
