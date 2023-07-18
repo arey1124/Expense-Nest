@@ -37,6 +37,13 @@ public class InvoiceRepository {
         return jdbcTemplate.query(sql, new InvoiceRowMapper(invoiceItemsRepository));
     }
 
+    public boolean updateInvoiceArchiveData (int invoiceId, boolean isArchived, String archiveReason) {
+        String sql = "UPDATE Receipt SET isArchived  ="+ (isArchived == false ? 0 : 1) +", archivedReason ='"+ archiveReason + "' WHERE id =" + invoiceId + ";";
+        System.out.println(sql);
+        jdbcTemplate.update(sql);
+        return false;
+    }
+
     private static class InvoiceRowMapper implements RowMapper<Invoice> {
 
         final InvoiceItemsRepository invoiceItemsRepository;
