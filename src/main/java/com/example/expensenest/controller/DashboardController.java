@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class DashboardController {
+public class    DashboardController {
 
     private InvoiceService invoiceService;
     private SessionService sessionService;
