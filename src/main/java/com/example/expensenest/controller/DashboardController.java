@@ -52,13 +52,28 @@ public class    DashboardController {
         User userSession = sessionService.getSession(session);
         model.addAttribute("invoices", invoiceService.getFilteredInvoices(userSession.getId(), queryString));
         model.addAttribute("user", userSession);
+        model.addAttribute("archivedState", false);
+        return "allInvoices";
+    }
+
+    @PostMapping("/archived")
+    public String searchArchivedInvoices (HttpServletRequest request, HttpSession session, Model model, @ModelAttribute("queryString") String queryString) {
+        User userSession = sessionService.getSession(session);
+        model.addAttribute("invoices", invoiceService.getFilteredInvoices(userSession.getId(), queryString));
+        model.addAttribute("user", userSession);
+        model.addAttribute("archivedState", true);
         return "allInvoices";
     }
 
     @PostMapping("/archive/{invoiceId}")
     public String archiveInvoices (@PathVariable(value="invoiceId") String invoiceId, @ModelAttribute("archivedReason") String archivedReason) {
-        System.out.println(archivedReason+ " : " + invoiceId);
         invoiceService.updateInvoiceArchiveData(Integer.valueOf(invoiceId), true, archivedReason);
         return "redirect:/invoices";
+    }
+
+    @PostMapping("/unarchive/{invoiceId}")
+    public String unrachiveInvoices (@PathVariable(value="invoiceId") String invoiceId) {
+        invoiceService.updateInvoiceArchiveData(Integer.valueOf(invoiceId), false, null);
+        return "redirect:/archived";
     }
 }
