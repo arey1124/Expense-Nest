@@ -22,11 +22,11 @@
                 <li><a href="#"><i class="material-symbols-outlined">
                     waving_hand
                 </i>&nbsp; Hello, India</a></li>
-                <li><a href="#"><i class="material-symbols-outlined">dashboard</i>&nbsp; Dashboard</a></li>
-                <li th:classappend="${archivedState} == false ? active : ''"><a href="#"><i class="material-symbols-outlined">
+                <li><a href="/dashboard"><i class="material-symbols-outlined">dashboard</i>&nbsp; Dashboard</a></li>
+                <li th:classappend="${archivedState} == false ? active : ''"><a href="/invoices"><i class="material-symbols-outlined">
                     receipt_long
                 </i>&nbsp; All invoices</a></li>
-                <li th:classappend="${archivedState} == true ? active : ''"><a href="#"><i class="material-symbols-outlined">
+                <li th:classappend="${archivedState} == true ? active : ''"><a href="/archived"><i class="material-symbols-outlined">
                     archive
                 </i>&nbsp; Archive invoices</a></li>
                 <li><a href="#"><i class="material-symbols-outlined">
