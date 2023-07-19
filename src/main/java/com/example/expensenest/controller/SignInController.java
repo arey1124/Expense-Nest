@@ -37,7 +37,6 @@ public class SignInController {
             sessionService.createSession(user, session);
             if (user.getUserType() == 1) {
                 return "redirect:/dashboard";
-
             } else {
                 return "redirect:/signin";
             //  TODO: redirect to seller dashboard

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,9 +13,11 @@
 <nav>
     <div class="menu_items">
         <ul class="nav_links">
-            <li><a href="#"><i class="material-symbols-outlined">
+            <li><i class="material-symbols-outlined">
                 waving_hand
-            </i>&nbsp; Hello, India</a></li>
+            </i>&nbsp; Hello,
+                <span class="text" th:text="${userData}"></span>
+            </li>
             <li class="active"><a href="/dashboard"><i class="material-symbols-outlined">dashboard</i>&nbsp; Dashboard</a></li>
             <li><a href="/invoices"><i class="material-symbols-outlined">
                 receipt_long
@@ -38,49 +40,31 @@
     <div class="content">
         <div class="boxes">
             <div class="box box_1">
-                <span class="text_light">Statistics</span>
-                <span class="text">Realtime users</span>
-                <span class="number">635</span>
-                <span class="percentage">+21.01%</span>
+                <span class="text">Total Items</span>
+                <span class="number" th:text="${statsData.get('itemsBought')}"></span>
             </div>
 
             <div class="box box_2">
-                <span class="text_light">Statistics</span>
-                <span class="text">Total visits</span>
-                <span class="number">325K</span>
-                <span class="percentage">+18.34%</span>
+                <span class="text">Total Expense</span>
+                <span class="number" th:text="${'$' + statsData.get('totalExpense')}"></span>
             </div>
 
             <div class="box box_3">
-                <span class="text_light">Statistics</span>
-                <span class="text">Visit duration</span>
-                <span class="number">5m 6s</span>
-                <span class="percentage">+7.69%</span>
+                <span class="text">Maximum Expense</span>
+                <span class="number" th:text="${'$' + statsData.get('maxExpense')}"></span>
             </div>
 
         </div>
+        <div id="box_scroll">
         <div class="horizontal_boxes">
-            <div class="h_box">
-                <span class="text">Walmart</span>
-                <span class="number">$19.98</span>
+            <div class="h_box" th:block th:each="invoice : ${invoiceData}">
+                <span class="text" th:text="${invoice.get('companyName')}"></span>
+                <span class="number" th:text="${'$' + invoice.get('totalAmount')}"></span>
+            </div>
+        </div>
             </div>
 
-            <div class="h_box">
-                <span class="text">Walmart</span>
-                <span class="number">$19.98</span>
 
-            </div>
-
-            <div class="h_box">
-                <span class="text">Walmart</span>
-                <span class="number">$19.98</span>
-            </div>
-
-            <div class="h_box">
-                <span class="text">Walmart</span>
-                <span class="number">$19.98</span>
-
-            </div>
         </div>
     </div>
 </section>

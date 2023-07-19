@@ -2,6 +2,7 @@ package com.example.expensenest.controller;
 
 import com.example.expensenest.entity.Invoice;
 import com.example.expensenest.entity.User;
+import com.example.expensenest.service.DashboardService;
 import com.example.expensenest.service.InvoiceService;
 import com.example.expensenest.service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,14 +19,18 @@ public class DashboardController {
 
     private InvoiceService invoiceService;
     private SessionService sessionService;
+    private DashboardService dashboardService;
 
-    public DashboardController(InvoiceService invoiceService, SessionService sessionService) {
+    public DashboardController(InvoiceService invoiceService, DashboardService dashboardService) {
         this.invoiceService = invoiceService;
-        this.sessionService = sessionService;
+        this.dashboardService = dashboardService;
     }
 
     @GetMapping("/dashboard")
     public String getUserDashboard (HttpServletRequest request, HttpSession session, Model model) {
+        model.addAttribute("invoiceData", dashboardService.getInvoiceData(2));
+        model.addAttribute("userData", dashboardService.getUserName(2));
+        model.addAttribute("statsData", dashboardService.getStatsData().get(0));
         return "dashboard";
     }
 
