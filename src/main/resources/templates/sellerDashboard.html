@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Seller Dashboard</title>
+    <link rel="stylesheet" href="/css/sellerDashboard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+ <nav>
+    <div class="menu_items">
+        <ul class="nav_links">
+            <li><span th:text="${user.name}"></span></li>
+            <li><a href="#" id="dashboard">Dashboard</a></li>
+            <li><a href="#">All invoices</a></li>
+            <li><a href="#">Manage Category</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Product Insights</a></li>
+            <li><a href="#">Edit Profile</a></li>
+        </ul>
+        <button class="logout_btn">Logout</button>
+    </div>
+ </nav>
+
+    <section>
+        <div class="content">
+            <div class="boxes">
+                <div class="box box_1">
+                    <span class="text_light">Statistics</span>
+                    <span class="text">Realtime users</span>
+                    <span class="number">635</span>
+                    <span class="percentage">+21.01%</span>
+                </div>
+
+                <div class="box box_2">
+                    <span class="text_light">Statistics</span>
+                    <span class="text">Total visits</span>
+                    <span class="number">325K</span>
+                    <span class="percentage">+18.34%</span>
+                </div>
+
+                <div class="box box_3">
+                    <span class="text_light">Statistics</span>
+                    <span class="text">Visit duration</span>
+                    <span class="number">5m 6s</span>
+                    <span class="percentage">+7.69%</span>
+                </div>
+
+            </div>
+            <div class="horizontal_box">
+                <div class="main_box">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

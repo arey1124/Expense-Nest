@@ -16,6 +16,9 @@ public interface UserService {
 
     User getUserByEmailAndPassword(UserSignIn userSignIn);
 
+    User getUserProfile(int sellerUserId);
+    Boolean setUserProfile(User userprofile);
+
     User findByVerificationCode(String code);
     boolean setUserPassword(User user);
 

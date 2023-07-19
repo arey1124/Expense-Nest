@@ -15,12 +15,13 @@
 
 <body>
 
-<div th:fragment="logoutFragment">
-    <button id=buttonLogOut class="btn btn-danger">Logout</button>
+<div th:fragment="logoutFragment" >
+    <div class="logoutButtonBottom">
+    <button id=buttonLogOut class="btn btn-primary">Logout</button>
 
-    <div id="logoutModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
+    <div id="logoutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="logoutModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="border: 1px solid; background-color: #fed89f;">
                 <div class="modal-header">
                     <h5 class="modal-title">Confirm Logout</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -35,6 +36,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -46,6 +48,7 @@
         $(document).ready(function() {
             $("#buttonLogOut").click(function() {
                 $("#logoutModal").modal("show");
+                 $('.modal-backdrop').removeClass("modal-backdrop");
             });
 
             $("#confirmLogOut").click(function() {
