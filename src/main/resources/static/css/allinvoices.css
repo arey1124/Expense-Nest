@@ -97,7 +97,7 @@ nav.menu_items {
     padding-left: 7px;
 }
 
-.menu_items li a:hover, ul li:nth-child(2){
+.menu_items li a:hover, ul li.active{
     margin-right: 40px;
     background-color: rgb(242, 193, 102);
     border-radius: 7px;
@@ -140,4 +140,17 @@ nav.menu_items {
 .search-text {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+}
+
+.archive-btn, .unarchive-btn {
+    background: #F2A530;
+}
+
+.cancel-btn {
+    color: #000000;
+    background: #fff;
+}
+
+.modal-footer {
+    border: none;
 }

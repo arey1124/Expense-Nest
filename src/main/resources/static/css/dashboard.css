@@ -57,7 +57,7 @@ nav.menu_items {
     padding-left: 7px;
 }
 
-.menu_items li a:hover, ul li:nth-child(2){
+.menu_items li a:hover, ul li.active{
     margin-right: 40px;
     background-color: rgb(242, 193, 102);
     border-radius: 7px;
