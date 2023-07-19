@@ -22,11 +22,11 @@
                 <li><a href="#"><i class="material-symbols-outlined">
                     waving_hand
                 </i>&nbsp; Hello, India</a></li>
-                <li><a href="#"><i class="material-symbols-outlined">dashboard</i>&nbsp; Dashboard</a></li>
-                <li><a href="#"><i class="material-symbols-outlined">
+                <li><a href="/dashboard"><i class="material-symbols-outlined">dashboard</i>&nbsp; Dashboard</a></li>
+                <li th:classappend="${archivedState} == false ? active : ''"><a href="/invoices"><i class="material-symbols-outlined">
                     receipt_long
                 </i>&nbsp; All invoices</a></li>
-                <li><a href="#"><i class="material-symbols-outlined">
+                <li th:classappend="${archivedState} == true ? active : ''"><a href="/archived"><i class="material-symbols-outlined">
                     archive
                 </i>&nbsp; Archive invoices</a></li>
                 <li><a href="#"><i class="material-symbols-outlined">
@@ -42,7 +42,7 @@
 
     <div class="invoices row" >
         <div class="search-bar input-group mb-3">
-            <form class="search-form" th:action="@{/invoices}" method="POST">
+            <form class="search-form" th:action="${archivedState} == false ? @{/invoices} : @{/archived}" method="POST">
                 <input type="text" class="form-control search-text" name="queryString" aria-label="Search invoice" placeholder="Search invoice">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit">
@@ -52,11 +52,13 @@
             </form>
         </div>
 
-        <div class="card mb-6" style="max-width: 27rem;" th:each="invoice: ${invoices}">
+        <div class="card mb-6" style="max-width: 27rem;" th:each="invoice: ${invoices}"
+             th:if="${invoice.isArchived} == ${archivedState}">
             <div class="card-header bg-transparent row">
                 <div class=" col-sm-12 invoice-actions">
-                    <img class="archive archive-invoice-${invoice.id}" src="/images/archive-icon.png" height="15" width="15"/>
-                    <img class="download download-invoice-${invoice.id}" src="/images/download-icon.png" height="15" width="15"/>
+                    <img class="archive" th:classappend="'archive-invoice-' + ${invoice.id}" data-bs-toggle="modal" th:attr="data-bs-target='#archiveReasonModal-' + ${invoice.id}" src="/images/archive-icon.png" height="15" width="15" th:if="${invoice.isArchived} == false"/>
+                    <img class="unarchive" th:classappend="'unarchive-invoice-' + ${invoice.id}" data-bs-toggle="modal" th:attr="data-bs-target='#unarchiveModal-' + ${invoice.id}" src="/images/unarchive-icon.png" height="15" width="15" th:if="${invoice.isArchived} == true"/>
+                    <img class="download" th:classappend="'download-invoice-' + ${invoice.id}"  src="/images/download-icon.png" height="15" width="15"/>
                 </div>
                 <div class="col-sm-12">
                     <span class="invoice-title">Invoice</span>
@@ -125,9 +127,47 @@
                 </div>
 
             </div>
+            <!-- Modal -->
+            <div class="modal fade" th:id="'archiveReasonModal-' + ${invoice.id}" tabindex="-1"  aria-hidden="true"  th:if="${invoice.isArchived} == false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form th:action="@{/archive/{id}(id=${invoice.id})}"  method="POST">
+                            <div class="modal-body">
+                                <h5>Are you sure you want to archive this receipt?</h5><br>
+                                <div class="form-group">
+                                    Please provide a reason to archive this invoice (Optional)<br><br>
+                                    <div class="input-group mb3">
+                                        <input type="text" class="form-control" name="archivedReason" aria-label="Reason to archive invoice" placeholder="Reason to archive invoice">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">No, Cancel</button>
+                                <button type="submit" class="btn archive-btn">Yes, confirm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade"th:id="'unarchiveModal-' + ${invoice.id}" tabindex="-1" aria-hidden="true"  th:if="${invoice.isArchived} == true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form th:action="@{/unarchive/{id}(id=${invoice.id})}"  method="POST">
+                            <div class="modal-body">
+                                Are you sure you want to unarchive this receipt?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">No, Cancel</button>
+                                <button type="submit" class="btn unarchive-btn">Yes, confirm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
+
 
     <script>
         date = new Date();
@@ -149,6 +189,8 @@
             printWindow.document.close();
             printWindow.print();
         });
+
+
     </script>
 </body>
 </html>
