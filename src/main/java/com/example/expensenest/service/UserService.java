@@ -12,6 +12,8 @@ public interface UserService {
 
     String addUser(User user);
 
+    String addSeller(User user);
+
     boolean verifyUser(String code);
 
     User getUserByEmailAndPassword(UserSignIn userSignIn);

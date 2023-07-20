@@ -34,8 +34,8 @@ public class ExpenseNestApplication implements CommandLineRunner, WebMvcConfigur
 //    Register the routes where relevant interceptor check is required
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-        interceptorRegistry.addInterceptor(activeSessionManager).addPathPatterns("/signup", "/signin", "/forgotpassword");
-        interceptorRegistry.addInterceptor(inActiveSessionManager).addPathPatterns("/layout", "/dashboard", "/invoices", "/editSeller");
+        interceptorRegistry.addInterceptor(activeSessionManager).addPathPatterns("/signup", "/signin", "/forgotpassword", "/signUpSeller");
+        interceptorRegistry.addInterceptor(inActiveSessionManager).addPathPatterns("/layout", "/dashboard", "/invoices", "/editSeller","/productInsights");
     }
 
 }
