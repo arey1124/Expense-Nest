@@ -9,4 +9,5 @@ import java.util.List;
 public interface InvoiceService {
     List<Invoice> getUserInvoices(int userId);
     List<Invoice> getFilteredInvoices(int userId, String searchString);
+    boolean updateInvoiceArchiveData (int invoiceId, boolean isArchived, String archiveReason);
 }

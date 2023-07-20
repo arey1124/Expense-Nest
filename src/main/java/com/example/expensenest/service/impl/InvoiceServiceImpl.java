@@ -25,4 +25,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     public List<Invoice> getFilteredInvoices(int userId, String searchString) {
         return invoiceRepository.getAllUserFilteredInvoices(userId, searchString);
     }
+
+    @Override
+    public boolean updateInvoiceArchiveData (int invoiceId, boolean isArchived, String archiveReason) {
+        return invoiceRepository.updateInvoiceArchiveData(invoiceId, isArchived, archiveReason);
+    }
 }
