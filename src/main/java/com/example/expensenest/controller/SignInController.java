@@ -37,16 +37,14 @@ public class SignInController {
             sessionService.createSession(user, session);
             if (user.getUserType() == 1) {
                 return "redirect:/dashboard";
-
             } else {
-                return "redirect:/signin";
+                return "redirect:/dashboard";
             //  TODO: redirect to seller dashboard
             }
         }
         else {
             return("redirect:/signin?signInMessage=Invalid email or password. Please try again.&isSignInSuccess=error");
         }
-
     }
 
     // TODO: Added below controller for verifying logout related functionality, this will be removed later once side-bar navigation panel is implemented

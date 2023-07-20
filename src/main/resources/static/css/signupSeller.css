@@ -10,6 +10,7 @@ nav {
     width: 350px;
     height: 470px;
     margin: 5% auto;
+    margin-top: -30px;
 }
 
 .form-title {
@@ -69,15 +70,8 @@ nav {
     padding-top: 15px;
 }
 
-.checkbox-color{
-    color: #CA6B26;
-}
 
-.forgot-password > a{
-    color: #CA6B26;
-}
-
-.sign-in > a {
+.label-signUp {
     display: block;
     text-align: center;
     color: #CA6B26;

@@ -60,7 +60,17 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user, code);
             return code;
         }
+    }
 
+    @Override
+    public String addSeller(User user) {
+        if(userRepository.checkUserExists(user)) {
+            return null;
+        } else {
+            String code = getVerificationCode();
+            userRepository.saveSeller(user, code);
+            return code;
+        }
     }
 
     public String getVerificationCode() {
