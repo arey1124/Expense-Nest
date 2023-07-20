@@ -47,14 +47,6 @@ public class SignInController {
         }
     }
 
-    // TODO: Added below controller for verifying logout related functionality, this will be removed later once side-bar navigation panel is implemented
-    @GetMapping("/layout")
-    public String testPage(Model model) {
-        UserSignIn signIn = new UserSignIn(null,null);
-        model.addAttribute("userSignIn", signIn);
-        return "/layout";
-    }
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         sessionService.removeSession(session);

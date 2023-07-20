@@ -82,5 +82,23 @@
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  function makeAjaxRequest() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/seller-chart-data", true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var data = JSON.parse(xhr.responseText);
+      // Handle the data received from the server
+    }
+  };
+  xhr.send();
+}
+
+ $(document).ready(function () {
+    makeAjaxRequest(); // Call the function on page load
+  });
+</script>
 </body>
 </html>
