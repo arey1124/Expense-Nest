@@ -13,7 +13,7 @@ nav {
     top: 0;
     left: 0;
     height: 100%;
-   /* width: 250px; */
+    width: 250px;
     padding: 10px 14px;
     background-color: white;
     border-top-right-radius: 25px;
@@ -135,22 +135,67 @@ nav.menu_items {
 
 
 .btn-primary {
-    background: #CA6B26;
+    background: #F2A530;
     color: #ffffff;
+    border: none;
 }
 
 .btn-primary:hover {
-     background: #a64d13;
-     color: #FFFFFF;
+    background: #F2A530;
+    color: #FFFFFF;
 }
 
 .modal-footer{
-     display: flex;
-     align-items: center;
-     justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn{
     margin: 3px;
+}
+
+.btn-submit {
+    background: #CA6B26;
+    color: #ffffff;
+    margin-top: 25px;
+}
+
+.btn-submit:hover {
+    background: #a64d13;
+    color: #FFFFFF;
+}
+
+form {
+    display: flex;
+    padding: 20px;
+}
+
+.category-div > h1 {
+    margin: 20px 20px 0px 20px;
+}
+
+.category-div {
+    background: #ffffff;
+    margin: 20px;
+    position: absolute;
+    bottom: 50%;
+    left: 25%;
+    min-height: 250px;
+    border-radius: 1em;
+}
+
+.field-name {
+    font-weight: 600;
+}
+
+.field-div {
+    padding: 10px;
+}
+
+.submit-div {
+    position: absolute;
+    bottom: 10px;
+    text-align-last: center;
 }
 

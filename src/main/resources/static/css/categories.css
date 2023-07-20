@@ -13,7 +13,7 @@ nav {
     top: 0;
     left: 0;
     height: 100%;
-   /* width: 250px; */
+    width: 250px;
     padding: 10px 14px;
     background-color: white;
     border-top-right-radius: 25px;
@@ -135,22 +135,71 @@ nav.menu_items {
 
 
 .btn-primary {
-    background: #CA6B26;
+    background: #F2A530;
     color: #ffffff;
+    border: none;
 }
 
 .btn-primary:hover {
-     background: #a64d13;
-     color: #FFFFFF;
+    background: #F2A530;
+    color: #FFFFFF;
 }
 
 .modal-footer{
-     display: flex;
-     align-items: center;
-     justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn{
     margin: 3px;
 }
 
+.category-actions {
+    text-align: right;
+    margin: 20px;
+}
+
+.categories > .category-card:nth-of-type(odd) {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/images/categories-bg-1.png");
+}
+
+.categories > .category-card:nth-of-type(even) {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/images/categories-bg-2.png");
+}
+
+.card {
+    margin: 5px;
+}
+
+.card-body {
+    border: none;
+    position: relative;
+}
+
+.card-header {
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.products-link {
+    color: #000000;
+    position: absolute;
+    bottom: 25px;
+}
+
+.category-image {
+    height: 150px;
+    width: 100px;
+    float: right;
+    margin-right: -27px;
+
+}
