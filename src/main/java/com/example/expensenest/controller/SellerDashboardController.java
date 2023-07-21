@@ -5,6 +5,7 @@ import com.example.expensenest.entity.User;
 import com.example.expensenest.enums.CategoryType;
 import com.example.expensenest.service.CategoryService;
 import com.example.expensenest.service.InvoiceService;
+import com.example.expensenest.service.ProductService;
 import com.example.expensenest.service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,12 +24,14 @@ public class SellerDashboardController {
     private SessionService sessionService;
 
     private CategoryService categoryService;
+    private ProductService productService;
 
     public SellerDashboardController(InvoiceService invoiceService, SessionService sessionService,
-                                     CategoryService categoryService) {
+                                     CategoryService categoryService, ProductService productService) {
         this.invoiceService = invoiceService;
         this.sessionService = sessionService;
         this.categoryService = categoryService;
+        this.productService = productService;
     }
 
     @GetMapping("/seller/dashboard")
@@ -51,16 +54,17 @@ public class SellerDashboardController {
 
     @PostMapping("/create/category")
     public String createCategory (@ModelAttribute("category") Category category) {
-        System.out.println(category.getName());
         category.setImage(category.formatImageData(category.getImage()));
-        System.out.println(category.getImage());
         categoryService.addCategory(category);
         return "redirect:/manage/category";
     }
 
     @GetMapping("/category/{categoryId}")
     public String getProductsByCategory (HttpServletRequest request, HttpSession session, Model model, @PathVariable(value="categoryId") String categoryId) {
-        return "sellerDashboard";
+        Category category = categoryService.getCategoryById(Integer.valueOf(categoryId));
+        model.addAttribute("category", category);
+        model.addAttribute("products", productService.getProductsByCategory(Integer.valueOf(categoryId)));
+        return "categoryProducts";
     }
 
     @GetMapping("/add/product")

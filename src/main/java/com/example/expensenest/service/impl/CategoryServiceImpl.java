@@ -20,6 +20,10 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.addCategory(category);
     }
 
+    public Category getCategoryById(int categoryId) {
+        return categoryRepository.getCategoryById(categoryId);
+    }
+
     public List<Category> getAllCategories() {
         return categoryRepository.getAllCategories();
     }

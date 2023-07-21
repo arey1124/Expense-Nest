@@ -26,12 +26,18 @@ public class ProductRepository {
         return jdbcTemplate.query(sql, new ProductsRowMapper(categoryRepository)).get(0);
     }
 
+    public List<Products> getProductsByCategory(int categoryId) {
+        String sql = "SELECT * FROM Products WHERE category=" + categoryId;
+        return jdbcTemplate.query(sql, new ProductsRowMapper(categoryRepository));
+    }
+
     private static class ProductsRowMapper implements RowMapper<Products> {
 
         private CategoryRepository categoryRepository;
         public ProductsRowMapper(CategoryRepository categoryRepository) {
             this.categoryRepository = categoryRepository;
         }
+
         @Override
         public Products mapRow(ResultSet resultSet, int rowNum) throws SQLException {
             Products product = new Products();
