@@ -1,6 +1,6 @@
 #buttonLogOut {
     background: #CA6B26;
-    color: #ffffff;
+        color: #ffffff;
 }
 
 #confirmLogOut {
@@ -18,3 +18,8 @@
     border-color: black;
     border-width: medium;
 }
+
+.logoutButtonBottom{
+    position: absolute;
+    bottom: 16px;
+    }

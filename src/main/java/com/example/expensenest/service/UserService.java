@@ -10,11 +10,22 @@ import java.util.List;
 public interface UserService {
     List<User> getAllUsers();
 
-    boolean addUser(User user);
+    String addUser(User user);
+
+    boolean verifyUser(String code);
 
     boolean editUser(User user);
 
     User getUserProfile(int UserId);
 
     User getUserByEmailAndPassword(UserSignIn userSignIn);
+
+    User getUserProfile(int sellerUserId);
+    Boolean setUserProfile(User userprofile);
+
+    User findByVerificationCode(String code);
+    boolean setUserPassword(User user);
+
+    public String generateUserVerificationCode();
+    public boolean setPasswordResetVerificationCode(String code, String email);
 }
