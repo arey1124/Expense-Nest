@@ -35,7 +35,8 @@ public class ProductInsightsController {
         HttpSession session = request.getSession();
         User userSession = sessionService.getSession(session);
         User profile = userService.getUserProfile(userSession.getId());
-        return userInsightsService.getUserInsightResponse(profile.getId());
+        var response =  userInsightsService.getUserInsightResponse(profile.getId());
+        return response;
     }
 
 }
