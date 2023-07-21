@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
           crossorigin="anonymous"></script>
-<!--  <link href="/css/edit_profile_seller.css" rel="stylesheet"/>-->
+
   <link href="/css/productInsights.css" rel="stylesheet"/>
   <link href="/css/logout.css" rel="stylesheet"/>
 
@@ -53,27 +53,45 @@
         <div class="boxes">
           <div class="box box_1">
             <span class="text_light">Best Selling Category</span>
-            <span class="text">Electronics</span>
-            <span class="number"></span>
-            <span class="percentage"></span>
+            <span class="text" id="headerText1"></span>
+            <span class="number" id="headerNumber1"></span>
+            <div style="width: 80%; margin: auto;">
+              <canvas id="salesChart1"></canvas>
+            </div>
           </div>
 
           <div class="box box_2">
-            <span class="text_light">Best Selling Product</span>
-            <span class="text">Apple iPhone 14 Pro</span>
+            <span class="text_light" >Best Selling Product</span>
+            <span class="text" id="headerText2"></span>
+            <span class="number" id="headerNumber2"></span>
+            <div style="width: 80%; margin: auto;">
+              <canvas id="salesChart2"></canvas>
+            </div>
           </div>
 
           <div class="box box_3">
             <span class="text_light">Total Sales</span>
-            <span class="text"></span>
+            <span class="text" id="headerNumber3"></span>
+            <span class="number" id="headerText3"></span>
+            <div style="width: 80%; margin: auto;">
+              <canvas id="salesChart3"></canvas>
+            </div>
           </div>
         </div>
 
         <div class="sales_report">
           <div class="category">
-            <span class="text_light">Top 3 Categories</span>
-            <span class="text">Sales Report</span>
+            <div class="row">
+              <span class="text_light">Top 3 Categories</span>
+              <span class="text">Sales Report</span>
+            </div>
+            <div class="row">
+              <canvas id="lineGraphCanvas"></canvas>
+            </div>
+
+
           </div>
+
         </div>
 
       </div>
@@ -82,15 +100,34 @@
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   function makeAjaxRequest() {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", "/seller-chart-data", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      var data = JSON.parse(xhr.responseText);
-      // Handle the data received from the server
+        console.log(xhr.responseText);
+      const userInsightsList = JSON.parse(xhr.responseText).userInsightsList;
+
+    // Loop through the userInsightsList array and update span tags' text content by ID
+
+    for (let i = 0; i < userInsightsList.length; i++) {
+
+      const insight = userInsightsList[i];
+      const nameSpan = document.getElementById(`headerText${insight.id}`);
+      const valueSpan = document.getElementById(`headerNumber${insight.id}`);
+
+      // Update the text content of the span tags
+      nameSpan.textContent = insight.name || "";
+      valueSpan.textContent = insight.value;
+
+        renderChart( JSON.parse(insight.graphString),  insight.id);
+    }
+
+// Calling the function to draw the graph when the page loads
+drawLineGraph();
+
     }
   };
   xhr.send();
@@ -98,7 +135,135 @@
 
  $(document).ready(function () {
     makeAjaxRequest(); // Call the function on page load
+
   });
+
+  function renderChart(salesData,id) {
+    var days = Array.from({ length: 31 }, (_, i) => i + 1);
+    var labels = days.filter((_, index) => salesData[index] !== 0);
+
+    var ctx = document.getElementById('salesChart'+id).getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Daily Sales',
+                data: salesData.filter(sales => sales !== 0),
+                fill: false,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                pointBorderColor: 'rgba(54, 162, 235, 1)',
+                pointHoverBackgroundColor: 'rgba(54, 162, 235, 1)',
+                pointHoverBorderColor: 'rgba(54, 162, 235, 1)',
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+
+
+const salesData = {
+  "category1": {
+    "name": "Category 1",
+    "data": [1000, 1200, 800, 1500, 1800, 1600, 1900, 2200, 2000, 2400, 2800, 2600],
+  },
+  "category2": {
+    "name": "Category 2",
+    "data": [500, 800, 600, 1000, 1300, 1400, 1200, 1500, 1700, 1800, 2000, 2300],
+  },
+  "category3": {
+    "name": "Category 3",
+    "data": [700, 900, 600, 1100, 1300, 1200, 1400, 1600, 1800, 2100, 2400, 2500],
+  },
+};
+
+// Months array to represent the x-axis labels
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// Function to draw the multiple line graph
+function drawLineGraph() {
+  const canvas = document.getElementById("lineGraphCanvas");
+  const ctx = canvas.getContext("2d");
+
+  // Set the canvas size
+  canvas.width = 800;
+  canvas.height = 500;
+
+  // Draw the x-axis
+  ctx.beginPath();
+  ctx.moveTo(50, 450);
+  ctx.lineTo(750, 450);
+  ctx.stroke();
+
+  // Draw the y-axis
+  ctx.beginPath();
+  ctx.moveTo(50, 450);
+  ctx.lineTo(50, 50);
+  ctx.stroke();
+
+  // Plot the data for each category
+  for (const category in salesData) {
+    const data = salesData[category].data;
+    ctx.beginPath();
+    ctx.strokeStyle = getRandomColor();
+    ctx.moveTo(50, 450 - data[0] / 10);
+
+    for (let i = 1; i < data.length; i++) {
+      const x = 50 + (i * (700 / 11));
+      const y = 450 - data[i] / 10;
+      ctx.lineTo(x, y);
+    }
+
+    ctx.stroke();
+  }
+
+  // Draw the x-axis labels
+  for (let i = 0; i < months.length; i++) {
+    const x = 50 + (i * (700 / 11));
+    const y = 470;
+    ctx.fillText(months[i], x, y);
+  }
+
+  // Draw the legend
+  let legendX = 600;
+  let legendY = 50;
+
+  for (const category in salesData) {
+    ctx.fillStyle = getRandomColor();
+    ctx.fillRect(legendX, legendY, 20, 20);
+    ctx.fillStyle = "black";
+    ctx.fillText(salesData[category].name, legendX + 30, legendY + 15);
+    legendY += 30;
+  }
+}
+
+// Helper function to generate random colors for the lines
+function getRandomColor() {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+
+
+
 </script>
 </body>
 </html>
