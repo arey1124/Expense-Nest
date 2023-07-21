@@ -26,6 +26,10 @@ public class User {
         this.email = email;
     }
 
+    public User(String email) {
+        this.email = email;
+    }
+
     public User(int id, String name, String email, String password, String isVerfied, int userType, String phoneNumber, int companyId) {
         this.id = id;
         this.name = name;

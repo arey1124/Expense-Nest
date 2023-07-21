@@ -19,16 +19,14 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 
 
     @Override
-    public void sendVerificationEmail(String recipientEmail, String verificationCode) {
+    public void sendVerificationEmail(String recipientEmail, String emailSubject,String emailMessage, String verificationCode) {
         SimpleMailMessage message = new SimpleMailMessage();
 try {
 
     message.setTo(recipientEmail);
-    message.setSubject("Please Verify Your Email");
-    message.setText("Click the following link to verify your email: " +
-            "http://localhost:8080/verify?code=" + verificationCode);
+    message.setSubject(emailSubject);
+    message.setText(emailMessage+": " +"http://localhost:8080/verify?code=" + verificationCode);
     javaMailSender.send(message);
-    System.out.println("Mail sent successfully");
 } catch (MailException e) {
     e.printStackTrace();
 }
