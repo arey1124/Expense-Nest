@@ -21,13 +21,11 @@ public class UserRepository {
     public UserRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
     public boolean save(User user, String verificationCode) {
         String sql = "INSERT INTO User (name, email, phoneNumber, userType, isVerified, verificationCode) VALUES (?, ?, ?, ?, ?,?)";
         jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPhoneNumber(), 1, 0,verificationCode);
         return true;
     }
-
     public User findByVerificationCode(String code) {
         String sql = "Select * from user where verificationCode = '" +code + "'";
         RowMapper<User> rowMapper = new UserRowMapper();
@@ -44,8 +42,7 @@ public class UserRepository {
         jdbcTemplate.update(sql);
         return true;
     }
-
-    public boolean editCustomer(User user) {
+    public boolean updateCustomer(User user) {
         try {
             String UPDATE_PROFILE_QUERY = "UPDATE user SET name = ?, phoneNumber = ? WHERE id = ?";
             Map<String, Object> editedValues = new HashMap<>();
@@ -60,7 +57,6 @@ public class UserRepository {
         }
 
     }
-
     public List<User> findAll() {
         String sql = "SELECT * FROM Users";
         return jdbcTemplate.query(sql, new UserRowMapper());
@@ -81,12 +77,12 @@ public class UserRepository {
         return users.isEmpty() ? null : users.get(0);
     }
 
-    public User getUserByID(int userId){
+    public User getCustomerUserProfile(int userId){
         String sql = "SELECT * FROM user WHERE id = ?";
         RowMapper<User> rowMapper = new UserRowMapper();
 
         List<User> users = jdbcTemplate.query(sql,new Object[]{  userId}, rowMapper);
-        return users.isEmpty() ? null : users.get(0);
+        return users.get(0);
     }
 
     public Boolean saveUserProfile(User userprofile){
@@ -117,8 +113,6 @@ public class UserRepository {
         int rows  = jdbcTemplate.update(sql, user.getPassword(), user.getEmail());
         return rows == 1;
     }
-
-
 
     private static class UserRowMapper implements RowMapper<User> {
         @Override

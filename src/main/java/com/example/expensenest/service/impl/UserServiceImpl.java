@@ -32,9 +32,12 @@ public class UserServiceImpl implements UserService {
     public User getUserProfile(int userId) {
         return userRepository.getUserByID(userId);
     }
-
     @Override
     public Boolean setUserProfile(User userprofile) {
+        return userRepository.saveUserProfile(userprofile);
+    }
+    @Override
+    public boolean updateUser(User userprofile) {
         return userRepository.saveUserProfile(userprofile);
     }
 
