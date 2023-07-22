@@ -32,7 +32,7 @@ public class SignInController {
         UserSignIn signIn = new UserSignIn(null, null);
         model.addAttribute("userSignIn", signIn);
         logger.debug("New UserSignIn instance created: {}", signIn);
-        return "/signin";
+        return "signin";
     }
 
     @PostMapping("/signinpost")
