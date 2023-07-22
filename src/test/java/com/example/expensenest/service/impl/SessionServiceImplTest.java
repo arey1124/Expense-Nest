@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 
 class SessionServiceImplTest {
 
-    private static final String SESSION_KEY = "loggedInUserData";
+        private static final String Session_Key = "loggedInUserData";
 
     @InjectMocks
     private SessionServiceImpl sessionService;
@@ -35,19 +35,19 @@ class SessionServiceImplTest {
     void testCreateSession() {
         sessionService.createSession(user, session);
 
-        verify(session, times(1)).setAttribute(eq(SESSION_KEY), eq(user));
+        verify(session, times(1)).setAttribute(eq(Session_Key), eq(user));
     }
 
     @Test
     void testRemoveSession() {
         sessionService.removeSession(session);
 
-        verify(session, times(1)).removeAttribute(eq(SESSION_KEY));
+        verify(session, times(1)).removeAttribute(eq(Session_Key));
     }
 
     @Test
     void testGetSession() {
-        when(session.getAttribute(eq(SESSION_KEY))).thenReturn(user);
+        when(session.getAttribute(eq(Session_Key))).thenReturn(user);
 
         User result = sessionService.getSession(session);
 
