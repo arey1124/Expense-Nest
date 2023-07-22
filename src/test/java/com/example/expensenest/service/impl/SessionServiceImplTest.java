@@ -40,10 +40,13 @@ class SessionServiceImplTest {
 
     @Test
     void testRemoveSession() {
-        sessionService.removeSession(session);
 
+        when(session.getAttribute(eq(Session_Key))).thenReturn(user);
+        sessionService.removeSession(session);
+        verify(session, times(1)).getAttribute(eq(Session_Key));
         verify(session, times(1)).removeAttribute(eq(Session_Key));
     }
+
 
     @Test
     void testGetSession() {
