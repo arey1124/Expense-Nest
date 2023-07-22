@@ -18,4 +18,8 @@ public class ProductServiceImpl implements ProductService {
     public List<Products> getProductsByCategory(int categoryId) {
         return productRepository.getProductsByCategory(categoryId);
     }
+
+    public boolean addProduct(Products products) {
+        return productRepository.addProduct(products);
+    }
 }

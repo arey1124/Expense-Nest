@@ -1,6 +1,5 @@
 package com.example.expensenest.repository;
 
-import com.example.expensenest.entity.Invoice;
 import com.example.expensenest.entity.Products;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -31,6 +30,12 @@ public class ProductRepository {
         return jdbcTemplate.query(sql, new ProductsRowMapper(categoryRepository));
     }
 
+    public boolean addProduct(Products products) {
+        String sql = "INSERT INTO expensenest.Products (name, price, category, image) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, products.getName(), products.getPrice(), products.getCategory(), products.getImage());
+        return true;
+    }
+
     private static class ProductsRowMapper implements RowMapper<Products> {
 
         private CategoryRepository categoryRepository;
@@ -44,7 +49,7 @@ public class ProductRepository {
             product.setId(resultSet.getInt("id"));
             product.setName(resultSet.getString("name"));
             product.setPrice(resultSet.getInt("price"));
-            product.setCategory(categoryRepository.findCategoryById(resultSet.getInt("category")));
+            product.setCategory(resultSet.getInt("category"));
             product.setImage(resultSet.getString("image"));
             return product;
         }
