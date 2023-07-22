@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProductService {
 
     public List<Products> getProductsByCategory(int categoryId);
+    public boolean addProduct(Products products);
 }

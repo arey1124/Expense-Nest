@@ -1,6 +1,7 @@
 package com.example.expensenest.controller;
 
 import com.example.expensenest.entity.Category;
+import com.example.expensenest.entity.Products;
 import com.example.expensenest.entity.User;
 import com.example.expensenest.enums.CategoryType;
 import com.example.expensenest.service.CategoryService;
@@ -69,6 +70,15 @@ public class SellerDashboardController {
 
     @GetMapping("/add/product")
     public String addNewProduct (HttpServletRequest request, HttpSession session, Model model) {
-        return "sellerDashboard";
+        model.addAttribute("categoryTypes", categoryService.getAllCategories());
+        model.addAttribute("product", new Products());
+        return "addProduct";
+    }
+
+    @PostMapping("/create/product")
+    public String createProduct (@ModelAttribute("product") Products product) {
+        product.storeAndProcessImage();
+        productService.addProduct(product);
+        return "redirect:/manage/category";
     }
 }
