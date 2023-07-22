@@ -52,6 +52,10 @@ public class UserServiceImpl implements UserService {
         logger.info("Setting user profile for userId: {}", userprofile.getId());
         return userRepository.saveUserProfile(userprofile);
     }
+    @Override
+    public boolean updateUser(User userprofile) {
+        return userRepository.saveUserProfile(userprofile);
+    }
 
     public User findByVerificationCode(String code) {
         logger.info("Fetching user by verification code: {}", code);
