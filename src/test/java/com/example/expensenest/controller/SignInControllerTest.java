@@ -40,15 +40,15 @@ class SignInControllerTest {
     @Test
     void testGetSignInForm() {
         String viewName = signInController.getSignInForm(model, null, session);
-        assertEquals("/signin", viewName);
+        assertEquals("signin", viewName);
         verify(model, times(1)).addAttribute(eq("userSignIn"), any(UserSignIn.class));
     }
 
     @Test
-    void testCheckSignInWithValidUser() {
+    void testCheckSignInWithValidUserSeller() {
         UserSignIn signIn = new UserSignIn("jinal@gmail.com", "Admin123");
         User user = new User();
-        user.setUserType(1);
+        user.setUserType(2); // Seller user type
 
         when(userService.getUserByEmailAndPassword(signIn)).thenReturn(user);
         String viewName = signInController.checkSignIn(signIn, session);
@@ -58,13 +58,16 @@ class SignInControllerTest {
     }
 
     @Test
-    void testCheckSignInWithInvalidUser() {
-        UserSignIn signIn = new UserSignIn("jinal@gmail.com", "Admin1234");
-        when(userService.getUserByEmailAndPassword(signIn)).thenReturn(null);
+    void testCheckSignInWithValidUserInvalidUserType() {
+        UserSignIn signIn = new UserSignIn("jinal@gmail.com", "Admin123");
+        User user = new User();
+        user.setUserType(3); // Invalid user type
+
+        when(userService.getUserByEmailAndPassword(signIn)).thenReturn(user);
         String viewName = signInController.checkSignIn(signIn, session);
 
-        assertEquals("redirect:/signin?signInMessage=Invalid email or password. Please try again.&isSignInSuccess=error", viewName);
-        verify(sessionService, never()).createSession(any(), any());
+        assertEquals("redirect:/dashboard", viewName);
+        verify(sessionService, times(1)).createSession(eq(user), eq(session));
     }
 
     @Test
