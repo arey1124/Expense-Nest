@@ -11,7 +11,8 @@ public class UserInsights {
     private String name;
     private double value;
     private String typeOfChart;
-    private String graphString;
+    private String graphStringX;
+    private String graphStringY;
 
     public UserInsights(){}
 
@@ -41,11 +42,18 @@ public class UserInsights {
         this.typeOfChart = typeOfChart;
     }
 
-    public String getGraphString() {
-        return graphString;
+    public String getGraphStringX() {
+        return graphStringX;
     }
 
-    public void setGraphString(String graphString) {
-        this.graphString = graphString;
+    public void setGraphStringX(String graphStringX) {
+        this.graphStringX = graphStringX;
+    }
+    public String getGraphStringY() {
+        return graphStringY;
+    }
+
+    public void setGraphStringY(String graphStringY) {
+        this.graphStringY = graphStringY;
     }
 }

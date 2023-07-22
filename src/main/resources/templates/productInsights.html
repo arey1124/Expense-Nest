@@ -82,18 +82,12 @@
         <div class="sales_report">
           <div class="category">
             <div class="row">
-              <span class="text_light">Top 3 Categories</span>
+              <span class="text_light">All Categories</span>
               <span class="text">Sales Report</span>
+              <canvas id="salesChart"></canvas>
             </div>
-            <div class="row">
-              <canvas id="lineGraphCanvas"></canvas>
-            </div>
-
-
           </div>
-
         </div>
-
       </div>
     </section>
   </div>
@@ -102,6 +96,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
+ $(document).ready(function () {
+    makeAjaxRequest(); // Call the function on page load to load all charts
+
+  });
+
+//Make an ajax call to fetch the chart's data from controller
+
   function makeAjaxRequest() {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", "/seller-chart-data", true);
@@ -109,6 +111,7 @@
     if (xhr.readyState === 4 && xhr.status === 200) {
         console.log(xhr.responseText);
       const userInsightsList = JSON.parse(xhr.responseText).userInsightsList;
+      const userInsightsSalesDataList = JSON.parse(xhr.responseText).userInsightsSalesDataList;
 
     // Loop through the userInsightsList array and update span tags' text content by ID
 
@@ -122,43 +125,42 @@
       nameSpan.textContent = insight.name || "";
       valueSpan.textContent = insight.value;
 
-        renderChart( JSON.parse(insight.graphString),  insight.id);
+        //Bind the data received from controller to graphs dynamically for all three
+        renderChart( JSON.parse(insight.graphStringX),JSON.parse(insight.graphStringY),  insight.id, insight.typeOfChart);
     }
 
 // Calling the function to draw the graph when the page loads
-drawLineGraph();
+ drawSalesChart(userInsightsSalesDataList);
+
+//drawLineGraph(userInsightsSalesDataList);
+//drawLineGraph();
 
     }
   };
   xhr.send();
 }
 
- $(document).ready(function () {
-    makeAjaxRequest(); // Call the function on page load
 
-  });
-
-  function renderChart(salesData,id) {
-    var days = Array.from({ length: 31 }, (_, i) => i + 1);
-    var labels = days.filter((_, index) => salesData[index] !== 0);
+//Function to bind data into the three charts
+  function renderChart(graphDataX, graphLabelY, id, chartLabel) {
 
     var ctx = document.getElementById('salesChart'+id).getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: graphDataX, //this is the data at x-axis
             datasets: [{
-                label: 'Daily Sales',
-                data: salesData.filter(sales => sales !== 0),
+                label: chartLabel, //this is the label for the values
+                data: graphLabelY, //this is the data at y-axis
                 fill: false,
-                borderColor: 'rgba(54, 162, 235, 1)',
+                borderColor: '#fed89f',
                 borderWidth: 2,
                 pointRadius: 5,
                 pointHoverRadius: 7,
-                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-                pointBorderColor: 'rgba(54, 162, 235, 1)',
-                pointHoverBackgroundColor: 'rgba(54, 162, 235, 1)',
-                pointHoverBorderColor: 'rgba(54, 162, 235, 1)',
+                pointBackgroundColor: '#fed89f',
+                pointBorderColor: '#fed89f',
+                pointHoverBackgroundColor: '#fed89f',
+                pointHoverBorderColor: '#fed89f',
             }]
         },
         options: {
@@ -174,95 +176,84 @@ drawLineGraph();
     });
 }
 
+function drawSalesChart(userInsightsSalesDataList) {
+      // Function to parse the string representation of arrays into actual arrays
+const parseArray = (str) => JSON.parse(str.replace(/'/g, '"'));
 
+// Extracting unique categories and months
+const categories = [...new Set(userInsightsSalesDataList.map(item => item.name))];
+const months = parseArray(userInsightsSalesDataList[0].month).map(month => {
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  return monthNames[month - 1];
+});
 
+// Initialize the sales array with zeros
+const sales = Array.from({ length: categories.length }, () => Array.from({ length: months.length }, () => 0));
+
+// Fill in the sales data
+userInsightsSalesDataList.forEach(item => {
+  const categoryIndex = categories.indexOf(item.name);
+  const salesData = parseArray(item.data);
+  salesData.forEach((value, index) => {
+    sales[categoryIndex][index] = value;
+  });
+});
+
+// Form the final salesData object
 const salesData = {
-  "category1": {
-    "name": "Category 1",
-    "data": [1000, 1200, 800, 1500, 1800, 1600, 1900, 2200, 2000, 2400, 2800, 2600],
-  },
-  "category2": {
-    "name": "Category 2",
-    "data": [500, 800, 600, 1000, 1300, 1400, 1200, 1500, 1700, 1800, 2000, 2300],
-  },
-  "category3": {
-    "name": "Category 3",
-    "data": [700, 900, 600, 1100, 1300, 1200, 1400, 1600, 1800, 2100, 2400, 2500],
-  },
+  categories,
+  months,
+  sales,
 };
 
-// Months array to represent the x-axis labels
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+console.log(salesData);
 
-// Function to draw the multiple line graph
-function drawLineGraph() {
-  const canvas = document.getElementById("lineGraphCanvas");
-  const ctx = canvas.getContext("2d");
+      // Prepare datasets for Chart.js
+      const datasets = salesData.categories.map((category, index) => ({
+        label: category,
+        data: salesData.sales[index],
+        borderColor: getRandomColor(), // Function to generate random colors
+        fill: false,
+      }));
 
-  // Set the canvas size
-  canvas.width = 800;
-  canvas.height = 500;
+      // Helper function to get a random color
+      function getRandomColor() {
+        return `rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255},0.6)`;
+      }
 
-  // Draw the x-axis
-  ctx.beginPath();
-  ctx.moveTo(50, 450);
-  ctx.lineTo(750, 450);
-  ctx.stroke();
+      // Chart.js configuration
+      const config = {
+        type: 'line',
+        data: {
+          labels: salesData.months,
+          datasets: datasets,
+        },
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Monthly Sales by Category',
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Sales',
+              },
+            },
+          },
+        },
+      };
 
-  // Draw the y-axis
-  ctx.beginPath();
-  ctx.moveTo(50, 450);
-  ctx.lineTo(50, 50);
-  ctx.stroke();
-
-  // Plot the data for each category
-  for (const category in salesData) {
-    const data = salesData[category].data;
-    ctx.beginPath();
-    ctx.strokeStyle = getRandomColor();
-    ctx.moveTo(50, 450 - data[0] / 10);
-
-    for (let i = 1; i < data.length; i++) {
-      const x = 50 + (i * (700 / 11));
-      const y = 450 - data[i] / 10;
-      ctx.lineTo(x, y);
+      // Create the chart
+      const ctx = document.getElementById('salesChart').getContext('2d');
+      new Chart(ctx, config);
     }
 
-    ctx.stroke();
-  }
-
-  // Draw the x-axis labels
-  for (let i = 0; i < months.length; i++) {
-    const x = 50 + (i * (700 / 11));
-    const y = 470;
-    ctx.fillText(months[i], x, y);
-  }
-
-  // Draw the legend
-  let legendX = 600;
-  let legendY = 50;
-
-  for (const category in salesData) {
-    ctx.fillStyle = getRandomColor();
-    ctx.fillRect(legendX, legendY, 20, 20);
-    ctx.fillStyle = "black";
-    ctx.fillText(salesData[category].name, legendX + 30, legendY + 15);
-    legendY += 30;
-  }
-}
-
-// Helper function to generate random colors for the lines
-function getRandomColor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
-
-
+    // Call the function when the document is ready
+    document.addEventListener('DOMContentLoaded', function () {
+      //drawSalesChart();
+    });
 
 </script>
 </body>
