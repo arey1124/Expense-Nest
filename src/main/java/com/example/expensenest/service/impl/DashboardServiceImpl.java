@@ -1,10 +1,12 @@
 package com.example.expensenest.service.impl;
 
+import com.example.expensenest.entity.DataPoint;
 import com.example.expensenest.service.DashboardService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,6 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public String getUserName(int userId) {
-        // Define RowMapper for User
         RowMapper<String> userRowMapper = (rs, rowNum) -> {
             String username = rs.getString("name");
             return username;
@@ -35,7 +36,6 @@ public class DashboardServiceImpl implements DashboardService {
     public List<Map<String, Object>> getInvoiceData(int userId) {
         Map<String, Object> invoiceData = new HashMap<>();
 
-        // Define RowMapper for Company
         RowMapper<Map<String, Object>> invoiceRowMapper = (rs, rowNum) -> {
             Map<String, Object> invoice = new HashMap<>();
             invoice.put("id", rs.getInt("id"));
@@ -57,7 +57,6 @@ public class DashboardServiceImpl implements DashboardService {
     public List<Map<String, Object>> getStatsData() {
         Map<String, Object> statsData = new HashMap<>();
 
-        // Define RowMapper for Company
         RowMapper<Map<String, Object>> statsRowMapper = (rs, rowNum) -> {
             Map<String, Object> stats = new HashMap<>();
             stats.put("itemsBought", rs.getInt("quantity"));
@@ -70,6 +69,47 @@ public class DashboardServiceImpl implements DashboardService {
         List<Map<String, Object>> stats = jdbcTemplate.query("SELECT sum(ri.quantity) as quantity, sum(r.totalAmount) as totalExpense, max(r.totalAmount) as maxExpense FROM receipt r INNER JOIN receiptitems ri ON r.id = ri.receiptId", statsRowMapper);
 
         return stats;
+    }
+
+    @Override
+    public List<DataPoint> getChartData() {
+        RowMapper<DataPoint> dataPointRowMapper = (rs, rowNum) -> {
+            String label = rs.getString("price");
+            double value = rs.getDouble("quantity");
+            return new DataPoint(label, value);
+        };
+
+        // Fetch data
+        List<DataPoint> chartData = jdbcTemplate.query("SELECT t1.price, t2.quantity FROM products t1 JOIN receiptitems t2 ON t1.id = t2.productId", dataPointRowMapper);
+
+        return chartData;
+    }
+
+        @Override
+        public List<DataPoint> getBarData() {
+            RowMapper<DataPoint> barRowMapper = (rs, rowNum) -> {
+                double totalAmount = rs.getDouble("totalAmount");
+                Date timeStamp = rs.getDate("dateOfPurchase");
+                return new DataPoint(totalAmount, timeStamp);
+            };
+
+            // Fetch data
+            List<DataPoint> barData = jdbcTemplate.query("SELECT totalAmount, dateOfPurchase FROM receipt", barRowMapper);
+
+            return barData;
+    }
+    @Override
+    public List<DataPoint> getPieData() {
+        RowMapper<DataPoint> pieRowMapper = (rs, rowNum) -> {
+            String name = rs.getString("name");
+            Integer sumAmount = rs.getInt("totalAmount");
+            return new DataPoint(name, sumAmount);
+        };
+
+        // Fetch data
+        List<DataPoint> pieData = jdbcTemplate.query("SELECT c.name, SUM(r.totalAmount) AS totalAmount FROM company c JOIN receipt r ON c.id = r.sellerId", pieRowMapper);
+
+        return pieData;
     }
 
 }
