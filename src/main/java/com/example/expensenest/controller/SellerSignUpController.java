@@ -29,7 +29,7 @@ public class SellerSignUpController {
         User signUp = new User();
         model.addAttribute("sellerSignUp", signUp);
         logger.debug("New User instance created: {}", signUp);
-        return "/signUpSeller";
+        return "signUpSeller";
     }
 
     @PostMapping("/sellersigninpost")
@@ -43,7 +43,7 @@ public class SellerSignUpController {
             return "redirect:/signin";
         } else {
             logger.info("New seller added. Sending verification email for email: {}", signUp.getEmail());
-            emailSenderService.sendVerificationEmail(signUp.getEmail(), code);
+            emailSenderService.sendVerificationEmail(signUp.getEmail(),"Please verify your email","Click the following link to verify your email", code);
             return "redirect:/signUpSeller";
         }
     }
