@@ -1,5 +1,5 @@
 package com.example.expensenest.controller;
-
+import com.example.expensenest.entity.DataPoint;
 import com.example.expensenest.entity.Invoice;
 import com.example.expensenest.entity.User;
 import com.example.expensenest.service.DashboardService;
@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
+
 
 @Controller
 public class DashboardController {
@@ -31,6 +34,16 @@ public class DashboardController {
         model.addAttribute("invoiceData", dashboardService.getInvoiceData(2));
         model.addAttribute("userData", dashboardService.getUserName(2));
         model.addAttribute("statsData", dashboardService.getStatsData().get(0));
+
+        List<DataPoint> chartData = dashboardService.getChartData();
+        model.addAttribute("chartData", chartData);
+
+        List<DataPoint> barData = dashboardService.getBarData();
+        model.addAttribute("barData", barData);
+
+        List<DataPoint> pieData = dashboardService.getPieData();
+        model.addAttribute("pieData", pieData);
+
         return "dashboard";
     }
 
