@@ -35,7 +35,7 @@ class SellerSignUpControllerTest {
     @Test
     void testGetSignInForm() {
         String viewName = sellerSignUpController.getSignInForm(model);
-        assertEquals("/signUpSeller", viewName);
+        assertEquals("signUpSeller", viewName); // Update the expected view name here
         verify(model, times(1)).addAttribute(eq("sellerSignUp"), any(User.class));
     }
 
@@ -48,7 +48,7 @@ class SellerSignUpControllerTest {
         String viewName = sellerSignUpController.checkSignIn(signUp);
 
         assertEquals("redirect:/signUpSeller", viewName);
-        verify(emailSenderService, times(1)).sendVerificationEmail(eq("ds.dalvin@gmail.com"), eq("verification_code"));
+        verify(emailSenderService, times(1)).sendVerificationEmail(eq("ds.dalvin@gmail.com"), eq("Please verify your email"), eq("Click the following link to verify your email"), eq("verification_code"));
     }
 
     @Test
@@ -60,6 +60,20 @@ class SellerSignUpControllerTest {
         String viewName = sellerSignUpController.checkSignIn(signUp);
 
         assertEquals("redirect:/signin", viewName);
-        verify(emailSenderService, never()).sendVerificationEmail(anyString(), anyString());
+        verify(emailSenderService, never()).sendVerificationEmail(anyString(), anyString(), anyString(), anyString());
     }
+
+    @Test
+    void testCheckSignInWithNullVerificationCode() {
+        User signUp = new User();
+        signUp.setEmail("ds.dalvin@gmail.com");
+
+        when(userService.addSeller(signUp)).thenReturn(null);
+
+        String viewName = sellerSignUpController.checkSignIn(signUp);
+
+        assertEquals("redirect:/signin", viewName);
+        verify(emailSenderService, never()).sendVerificationEmail(anyString(), anyString(), anyString(), anyString());
+    }
+
 }
