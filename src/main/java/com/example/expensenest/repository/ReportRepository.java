@@ -44,11 +44,6 @@ public class ReportRepository {
             salesReport.setPrice(resultSet.getInt("price"));
             salesReport.setQty(resultSet.getInt("qty"));
             salesReport.setAmount(resultSet.getInt("amount"));
-//        product.setId(resultSet.getInt("id"));
-//        product.setName(resultSet.getString("name"));
-//        product.setPrice(resultSet.getInt("price"));
-//        product.setCategory(categoryRepository.findCategoryById(resultSet.getInt("category")));
-//        product.setImage(resultSet.getString("image"));
             return salesReport;
         }
     }
