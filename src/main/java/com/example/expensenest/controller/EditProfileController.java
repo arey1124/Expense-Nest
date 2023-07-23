@@ -38,6 +38,6 @@ public class EditProfileController {
         else{
             model.addAttribute("errorMessage", "Something went wrong.");
         }
-        return "editCustomerProfile";
+        return "/editCustomerProfile";
     }
 }
