@@ -9,4 +9,6 @@ public interface ProductService {
 
     public List<Products> getProductsByCategory(int categoryId);
     public boolean addProduct(Products products);
+
+    public List<Products> searchProductsByQuery (int categoryId, String query);
 }

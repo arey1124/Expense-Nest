@@ -81,4 +81,12 @@ public class SellerDashboardController {
         productService.addProduct(product);
         return "redirect:/manage/category";
     }
+
+    @PostMapping("/category/{categoryId}")
+    public String searchProducts (Model model,@PathVariable(value="categoryId") String categoryId, @ModelAttribute("queryString") String queryString) {
+        Category category = categoryService.getCategoryById(Integer.valueOf(categoryId));
+        model.addAttribute("category", category);
+        model.addAttribute("products", productService.searchProductsByQuery(Integer.valueOf(categoryId), queryString));
+        return "categoryProducts";
+    }
 }
