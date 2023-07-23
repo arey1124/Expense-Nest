@@ -58,7 +58,7 @@
             <input type="tel" class="form-control" id="contact" placeholder="1234567890" th:field="*{phoneNumber}" value="${user.phoneNumber}">
         </div>
         <div class="buttons">
-            <button class="cancel-btn" onclick="resetFields()">Cancel</button>
+            <a href="/editCustomerProfile" class="cancel-btn">Cancel</a>
             <button class="save-btn" onclick="saveProfile()">Save</button>
             <!--<button class="reset-password-btn" onclick="redirectToResetPage()">Reset</button>-->
         </div>
