@@ -36,6 +36,11 @@ public class ProductRepository {
         return true;
     }
 
+    public List<Products> searchProductsByQuery (int categoryId, String query) {
+        String sql = "SELECT * FROM Products WHERE category=" + categoryId + " AND name LIKE '%"+ query + "%'";
+        return jdbcTemplate.query(sql, new ProductsRowMapper(categoryRepository));
+    }
+
     private static class ProductsRowMapper implements RowMapper<Products> {
 
         private CategoryRepository categoryRepository;

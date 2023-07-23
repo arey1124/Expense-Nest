@@ -22,4 +22,8 @@ public class ProductServiceImpl implements ProductService {
     public boolean addProduct(Products products) {
         return productRepository.addProduct(products);
     }
+
+    public List<Products> searchProductsByQuery (int categoryId, String query) {
+        return productRepository.searchProductsByQuery(categoryId, query);
+    }
 }
