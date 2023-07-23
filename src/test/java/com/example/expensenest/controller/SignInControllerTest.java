@@ -13,6 +13,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 class SignInControllerTest {
@@ -68,6 +70,17 @@ class SignInControllerTest {
 
         assertEquals("redirect:/dashboard", viewName);
         verify(sessionService, times(1)).createSession(eq(user), eq(session));
+    }
+
+
+    @Test
+    void testCheckSignInWithInvalidCredentials() {
+        UserSignIn signIn = new UserSignIn("jinal@gmail.com", "InvalidPass");
+
+        when(userService.getUserByEmailAndPassword(signIn)).thenReturn(null);
+        String viewName = signInController.checkSignIn(signIn, session);
+
+        assertEquals("redirect:/signin?signInMessage=Invalid email or password. Please try again.&isSignInSuccess=error", viewName);
     }
 
     @Test

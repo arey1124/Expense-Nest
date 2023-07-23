@@ -35,7 +35,7 @@ class SellerSignUpControllerTest {
     @Test
     void testGetSignInForm() {
         String viewName = sellerSignUpController.getSignInForm(model);
-        assertEquals("signUpSeller", viewName); // Update the expected view name here
+        assertEquals("signUpSeller", viewName);
         verify(model, times(1)).addAttribute(eq("sellerSignUp"), any(User.class));
     }
 
@@ -76,4 +76,16 @@ class SellerSignUpControllerTest {
         verify(emailSenderService, never()).sendVerificationEmail(anyString(), anyString(), anyString(), anyString());
     }
 
+    @Test
+    void testCheckSignInWithNonNullVerificationCode() {
+        User signUp = new User();
+        signUp.setEmail("ds.dalvin@gmail.com");
+
+        when(userService.addSeller(signUp)).thenReturn("verification_code");
+
+        String viewName = sellerSignUpController.checkSignIn(signUp);
+
+        assertEquals("redirect:/signUpSeller", viewName);
+        verify(emailSenderService, times(1)).sendVerificationEmail(eq("ds.dalvin@gmail.com"), eq("Please verify your email"), eq("Click the following link to verify your email"), eq("verification_code"));
+}
 }
