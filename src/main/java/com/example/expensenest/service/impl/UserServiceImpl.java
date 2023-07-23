@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         logger.info("Fetching user profile for userId: {}", userId);
         return userRepository.getUserByID(userId);
     }
+
     @Override
     public Boolean setUserProfile(User userprofile) {
         logger.info("Setting user profile for userId: {}", userprofile.getId());
