@@ -38,14 +38,6 @@ public class UserServiceImpl implements UserService {
         logger.info("Fetching user profile for userId: {}", userId);
         return userRepository.getUserByID(userId);
     }
-    @Override
-    public User getUserProfile(int UserId){
-        return userRepository.getUserByID(UserId);
-    }
-    @Override
-    public boolean editUser(User user) {
-        return userRepository.editCustomer(user);
-    }
 
     @Override
     public Boolean setUserProfile(User userprofile) {
