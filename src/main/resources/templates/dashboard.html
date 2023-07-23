@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 
@@ -40,18 +41,15 @@
     <div class="content">
         <div class="boxes">
             <div class="box box_1">
-                <span class="text">Total Items</span>
-                <span class="number" th:text="${statsData.get('itemsBought')}"></span>
+                <canvas id="barChart"></canvas>
             </div>
 
             <div class="box box_2">
-                <span class="text">Total Expense</span>
-                <span class="number" th:text="${'$' + statsData.get('totalExpense')}"></span>
+                <canvas id="lineChart"></canvas>
             </div>
 
             <div class="box box_3">
-                <span class="text">Maximum Expense</span>
-                <span class="number" th:text="${'$' + statsData.get('maxExpense')}"></span>
+                <canvas id="pieChart"></canvas>
             </div>
 
         </div>
@@ -68,5 +66,90 @@
         </div>
     </div>
 </section>
+
+<script th:inline="javascript">
+    // Get the chart data from the model attribute
+    var chartData = /*[[${chartData}]]*/ [];
+
+    // Create an array of labels and an array of data values
+    var labels = [];
+    var values = [];
+    chartData.forEach(function(dataPoint) {
+        labels.push(dataPoint.label);
+        values.push(dataPoint.value);
+    });
+
+    // Create a new chart using Chart.js
+    var ctx = document.getElementById('lineChart').getContext('2d');
+    var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Quantity and Price',
+                data: values,
+                borderColor: 'blue',
+                backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                fill: true
+            }]
+        },
+    });
+
+// Get the chart data from the model attribute
+    var barData = /*[[${barData}]]*/ [];
+
+    var totalAmount = [];
+    var date = [];
+    barData.forEach(function(dataPoint) {
+        totalAmount.push(dataPoint.totalAmount);
+        date.push(dataPoint.timeStamp);
+    });
+
+    // Create a new chart using Chart.js
+    var ctx = document.getElementById('barChart').getContext('2d');
+    var lineChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: date,
+            datasets: [{
+                label: 'Total Amount and Date',
+                data: totalAmount,
+                borderColor: 'blue',
+                backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                fill: true
+            }]
+        },
+    });
+
+// Get the chart data from the model attribute
+    var pieData = /*[[${pieData}]]*/ [];
+    console.log(pieData);
+
+    var Name = [];
+    var sumAmount = [];
+    pieData.forEach(function(dataPoint) {
+        Name.push(dataPoint.name);
+        sumAmount.push(dataPoint.sumAmount);
+    });
+
+    // Create a new chart using Chart.js
+    var ctx = document.getElementById('pieChart').getContext('2d');
+    var pieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: Name,
+            datasets: [{
+                label: 'Company and Total Spent',
+                data: sumAmount,
+                borderColor: 'blue',
+                backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                fill: true
+            }]
+        },
+        options: {
+        aspectRatio:2
+}
+    });
+</script>
 </body>
 </html>

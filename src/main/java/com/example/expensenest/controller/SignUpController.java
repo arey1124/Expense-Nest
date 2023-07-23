@@ -28,13 +28,15 @@ private  final EmailSenderService emailSenderService;
     }
 
     @PostMapping("/user/create")
-    public String createUser(@ModelAttribute("user") User user) {
+    public String createUser(@ModelAttribute("user") User user, Model model) {
         String code = userService.addUser(user);
         if (code == null) {
-            return "redirect:/signin";
+            model.addAttribute("userExists",true);
+            return "/signup";
         } else {
-            emailSenderService.sendVerificationEmail(user.getEmail(), code);
-            return "redirect:/signup";
+            emailSenderService.sendVerificationEmail(user.getEmail(),"Please verify your email","Click the following link to verify your email", code);
+            model.addAttribute("user",user);
+            return "/signup";
         }
     }
 }
