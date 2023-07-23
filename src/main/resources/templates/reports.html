@@ -89,34 +89,6 @@
                         </div>
                     </div>
                 </div>
-                <div th:if="${reportData}">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-lg table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col" >Product Name</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">TotalAmount</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="data: ${reportData}">
-                                        <th scope="row" th:text="${data.name}"></th>
-                                        <td th:text="${data.qty}"></td>
-                                        <td th:text="${data.price}"></td>
-                                        <td th:text="${data.amount}"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
         </div>
     </div>
