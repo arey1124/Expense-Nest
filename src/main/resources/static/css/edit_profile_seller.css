@@ -13,7 +13,6 @@ nav {
     top: 0;
     left: 0;
     height: 100%;
-   /* width: 250px; */
     padding: 10px 14px;
     background-color: white;
     border-top-right-radius: 25px;
@@ -45,7 +44,6 @@ nav.menu_items {
 .menu_items li a:hover,
 ul li:nth-child(2) {
     border-radius: 7px;
-    /*font-weight: 600;*/
 }
 
 .active {
@@ -57,16 +55,6 @@ ul li:nth-child(2) {
 .content {
     padding-top: 50px;
 }
-/*
-.content .boxes {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-left: 300px;
-    margin-right: 20px;
-}
-*/
 
 .content .boxes .box {
     display: flex;
@@ -80,60 +68,11 @@ ul li:nth-child(2) {
 
 }
 
-.content .boxes .box .text_light {
-    font-weight: 100;
-    font-size: 0.8em;
-}
-
-.content .boxes .box .text{
-    font-size: 1.5em;
-}
-
-.content .boxes .box .number {
-    margin-top: 10px;
-    font-size: 2.5rem;
-}
-
-.content .boxes .box .percentage {
-    margin-top: 7px;
-    font-size: 0.9em;
-    color: green;
-}
-
-.content .horizontal_boxes {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-top: 50px;
-    margin-left: 300px;
-    margin-right: 20px;
-}
-
-.content .horizontal_boxes .h_box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 3.5em;
-    box-shadow: 0px 1px 5px gray;
-    margin-top: 30px;
-    border-radius: 12px;
-    background-color: white;
-}
-
-.content .horizontal_boxes .h_box .text {
-    font-size: 1.2em;
-    padding-left: 20px;
-}
-
-.content .horizontal_boxes .h_box .number {
-    font-size: 1.2em;
-    padding-right: 20px;
-}
-
-.content .boxes .box:hover, .content .horizontal_boxes .h_box:hover  {
-    box-shadow: 7px 7px 5px gray;
-    font-weight: 600;
-    cursor: pointer;
+label {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    display: inline-block;
 }
 
 .form-group {
@@ -145,18 +84,9 @@ ul li:nth-child(2) {
             margin-block-end: 15px;
 }
 
-/*
- .btn-primary {
-            margin-top: 40px;
- }
- */
-
  .btn-primary {
      background: #CA6B26;
      color: #ffffff;
-     /*height: 50px;
-
-     margin-top: 40px;*/
  }
 
  .btn-primary:hover {
