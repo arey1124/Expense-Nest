@@ -57,8 +57,8 @@ margin:100px;
     height: 500px;
     padding: 15px 12px;
     background-color: white;
-
 }
+
 .btn-submit {
     background: #CA6B26;
     color: #ffffff;
@@ -69,9 +69,4 @@ margin:100px;
 .btn-submit:hover {
     background: #a64d13;
     color: #FFFFFF;
-}
-
-table{
-margin:1em;
-border: 1px solid black;
 }
