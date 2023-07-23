@@ -20,7 +20,7 @@ nav {
     line-height: 80px;
     text-align: center;
     color: #CA8826;
-    margin-top: 25px;
+    margin-top: -70px;
 }
 
 .input-group > input {
@@ -57,7 +57,7 @@ nav {
     color: #ffffff;
     height: 50px;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .btn-submit:hover {
@@ -90,4 +90,14 @@ nav {
     height: 139.35px;
     left: 0px;
     bottom: 0;
+}
+
+#signUpButton{
+width: 100px;
+margin-top: 3px;
+background: #0b42a5db;
+}
+
+.d-flex {
+    margin-top: -20px;
 }
