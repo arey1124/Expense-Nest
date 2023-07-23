@@ -41,7 +41,7 @@
         <div class="header">
             <h1 class="header_title">Edit Profile</h1>
             <div class="profile-image">
-                <img src="images/user_profile.png?ver=1.2.3" alt="Profile Image">
+                <img src="/images/user_profile.png" alt="Profile Image">
             </div>
         </div>
         <input type="hidden" class="form-control" id="id" th:field="*{id}">
@@ -94,7 +94,7 @@
     // Perform some validation later
 
     // Call the editprofile API endpoint or controller
-    fetch('/editprofile', {
+    fetch('/editCustomerProfile', {
       method: 'POST',
       body: JSON.stringify({
         fullName: document.getElementById("fullName").value,
