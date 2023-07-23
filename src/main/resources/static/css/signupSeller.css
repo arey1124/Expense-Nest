@@ -10,6 +10,7 @@ nav {
     width: 350px;
     height: 470px;
     margin: 5% auto;
+    margin-top: -30px;
 }
 
 .form-title {
@@ -20,7 +21,7 @@ nav {
     line-height: 80px;
     text-align: center;
     color: #CA8826;
-    margin-top: -70px;
+    margin-top: 25px;
 }
 
 .input-group > input {
@@ -57,7 +58,7 @@ nav {
     color: #ffffff;
     height: 50px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .btn-submit:hover {
@@ -69,15 +70,8 @@ nav {
     padding-top: 15px;
 }
 
-.checkbox-color{
-    color: #CA6B26;
-}
 
-.forgot-password > a{
-    color: #CA6B26;
-}
-
-.sign-in > a {
+.label-signUp {
     display: block;
     text-align: center;
     color: #CA6B26;
@@ -90,14 +84,4 @@ nav {
     height: 139.35px;
     left: 0px;
     bottom: 0;
-}
-
-#signUpButton{
-width: 100px;
-margin-top: 3px;
-background: #0b42a5db;
-}
-
-.d-flex {
-    margin-top: -20px;
 }
