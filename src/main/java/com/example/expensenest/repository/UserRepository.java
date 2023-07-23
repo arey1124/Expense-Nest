@@ -28,6 +28,12 @@ public class UserRepository {
         return true;
     }
 
+    public boolean saveSeller(User user, String verificationCode) {
+        String sql = "INSERT INTO User (name, email, phoneNumber, userType, isVerified, verificationCode, companyId) VALUES (?, ?, ?, ?, ?,?,?)";
+        jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPhoneNumber(), 2, 0,verificationCode, 1);
+        return true;
+    }
+
     public User findByVerificationCode(String code) {
         String sql = "Select * from user where verificationCode = '" +code + "'";
         RowMapper<User> rowMapper = new UserRowMapper();
