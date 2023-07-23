@@ -51,9 +51,31 @@ public class UserRepository {
         return true;
     }
 
+    public boolean updateCustomer(User user) {
+        try {
+            String UPDATE_PROFILE_QUERY = "UPDATE user SET name = ?, phoneNumber = ? WHERE id = ?";
+            Map<String, Object> editedValues = new HashMap<>();
+            editedValues.put("id", user.getId());
+            editedValues.put("Name", user.getName());
+            editedValues.put("phoneNumber", user.getPhoneNumber());
+
+            int rowsAffected = jdbcTemplate.update(UPDATE_PROFILE_QUERY, new Object[]{user.getName(), user.getPhoneNumber(), user.getId()});
+            return rowsAffected > 0;
+        }catch (Exception ex){
+            return false;
+        }
+
+    }
     public List<User> findAll() {
         String sql = "SELECT * FROM Users";
         return jdbcTemplate.query(sql, new UserRowMapper());
+    }
+    public User getUserByID(int userId){
+        String sql = "SELECT * FROM user WHERE id = ?";
+        RowMapper<User> rowMapper = new UserRowMapper();
+
+        List<User> users = jdbcTemplate.query(sql,new Object[]{  userId}, rowMapper);
+        return users.isEmpty() ? null : users.get(0);
     }
 
     public User getUserByEmailAndPassword(UserSignIn userSignIn) {
@@ -64,12 +86,12 @@ public class UserRepository {
         return users.isEmpty() ? null : users.get(0);
     }
 
-    public User getUserByID(int userId){
+    public User getCustomerUserProfile(int userId){
         String sql = "SELECT * FROM user WHERE id = ?";
         RowMapper<User> rowMapper = new UserRowMapper();
 
         List<User> users = jdbcTemplate.query(sql,new Object[]{  userId}, rowMapper);
-        return users.isEmpty() ? null : users.get(0);
+        return users.get(0);
     }
 
     public Boolean saveUserProfile(User userprofile){
@@ -100,8 +122,6 @@ public class UserRepository {
         int rows  = jdbcTemplate.update(sql, user.getPassword(), user.getEmail());
         return rows == 1;
     }
-
-
 
     private static class UserRowMapper implements RowMapper<User> {
         @Override

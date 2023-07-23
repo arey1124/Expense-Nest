@@ -1,0 +1,232 @@
+body {
+    background: #FED89F;
+}
+
+.invoices {
+    font-size: 15px;
+    margin-left: 280px;
+}
+
+.invoices > .card {
+    margin: 5px;
+}
+
+.category, .total, .price, .quantity {
+    font-size: 12px;
+}
+
+.currentDate {
+    display: inline;
+}
+
+.logo {
+    float: right;
+}
+
+.total-div {
+    text-align: right;
+}
+
+.product-header {
+    font-weight: 600;
+}
+
+.invoice-number-date {
+    text-align: right;
+}
+
+.card-header {
+    border-bottom: solid;
+}
+
+.invoice-title {
+    font-weight: 600;
+    top: 35px;
+    position: absolute;
+}
+
+.invoice-actions > img {
+    float: right;
+    margin: 5px;
+}
+
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: white;
+    border-top-right-radius: 25px;
+    box-shadow: 1px 0px 5px gray;
+}
+
+nav.menu_items {
+    margin-top: 40px;
+    height: calc(100% - 90px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu_items li {
+    list-style: none;
+}
+.menu_items li a {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 25px;
+    color: black;
+    padding-left: 7px;
+}
+
+.menu_items li a:hover, ul li:nth-child(5){
+    margin-right: 40px;
+    background-color: rgb(242, 193, 102);
+    border-radius: 7px;
+    font-weight: 600;
+}
+
+/* Style for the active tab */
+.nav_links li a.active {
+    color: #FF0000; /* Set the desired color for the active tab */
+}
+
+.logout_btn {
+    background-color: rgb(242, 193, 102);
+    padding: 8px;
+    padding-top: 1%;
+    border-radius: 5px;
+    border-color: rgb(242, 193, 102);
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 50px;
+
+}
+
+.container
+{
+	background-color:#ffffff;
+	height:710px;
+	width:900px;
+	filter:drop-shadow(7px -1px 12px rgba(0,0,0,0.10999999940395355));
+	border-radius:20px;
+	left:300px;
+	top:4px;
+	position:absolute;
+	margin-top: 40px;
+	height: 570px;
+	display: flex;
+	padding-right:40px;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	padding:20px 60px;
+	gap: 400px;
+}
+
+.header_title{
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.profile-image img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+.profile-image {
+  width: 111px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: transparent;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  color: #F2A530;
+}
+
+.form-group {
+	padding-left:60px;
+	padding-right:60px;
+	margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+	text-align:left;
+	font-size:22px;
+	font-family:Poppins;
+	width:134px;
+	height:21px;
+	border-style:hidden;
+	outline:none;
+}
+
+.form-group input{
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 20px;
+  opacity: 1;
+  text-align: left;
+}
+
+.buttons{
+	padding:22px 120px;
+	display: flex;
+	align-items: center;
+	gap: 100px;
+	display: flex;
+ align-items: center;
+ justify-content: center;
+
+}
+
+.cancel-btn,
+.reset-password-btn,
+.save-btn {
+  width: 180px;
+  height: 44px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #F5F5F5;
+  background: #F2A530;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cancel-btn,
+.reset-password-btn{
+  border: 2px solid #F2A530;
+  background-color: white;
+  color: #F2A530;
+}
+
+.cancel-btn:hover,
+.reset-password-btn:hover,
+.save-btn:hover {
+  background: #FF7008;
+}
