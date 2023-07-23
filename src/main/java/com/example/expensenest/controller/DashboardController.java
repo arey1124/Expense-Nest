@@ -24,9 +24,10 @@ public class DashboardController {
     private SessionService sessionService;
     private DashboardService dashboardService;
 
-    public DashboardController(InvoiceService invoiceService, DashboardService dashboardService) {
+    public DashboardController(InvoiceService invoiceService, DashboardService dashboardService, SessionService sessionService) {
         this.invoiceService = invoiceService;
         this.dashboardService = dashboardService;
+        this.sessionService = sessionService;
     }
 
     @GetMapping("/dashboard")
