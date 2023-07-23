@@ -17,8 +17,8 @@ public class ReportServiceImpl implements ReportService {
         this.reportRepository = reportRepository;
     }
     @Override
-    public List<SalesReport> getSalesReportData(int sellerId) {
-        return reportRepository.getSalesReportBySellerID(sellerId);
+    public List<SalesReport> getSalesReportData(int sellerId, String startDate, String endDate) {
+        return reportRepository.getSalesReportBySellerID(sellerId, startDate,endDate);
 
     }
 }

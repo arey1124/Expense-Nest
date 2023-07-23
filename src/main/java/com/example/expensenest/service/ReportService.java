@@ -8,5 +8,5 @@ import java.util.List;
 @Service
 public interface ReportService {
 
-    List<SalesReport> getSalesReportData(int sellerId);
+    List<SalesReport> getSalesReportData(int sellerId, String startDate, String endDate);
 }
