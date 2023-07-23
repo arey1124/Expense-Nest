@@ -107,7 +107,7 @@ public class DashboardServiceImpl implements DashboardService {
         };
 
         // Fetch data
-        List<DataPoint> pieData = jdbcTemplate.query("SELECT c.name, SUM(r.totalAmount) AS totalAmount FROM company c JOIN receipt r ON c.id = r.sellerId", pieRowMapper);
+        List<DataPoint> pieData = jdbcTemplate.query("SELECT c.name, SUM(r.totalAmount) AS totalAmount FROM company c JOIN receipt r ON c.id = r.sellerId GROUP BY c.name", pieRowMapper);
 
         return pieData;
     }
