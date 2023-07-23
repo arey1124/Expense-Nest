@@ -32,8 +32,10 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String getUserDashboard (HttpServletRequest request, HttpSession session, Model model) {
-        model.addAttribute("invoiceData", dashboardService.getInvoiceData(2));
-        model.addAttribute("userData", dashboardService.getUserName(2));
+        User userSession = sessionService.getSession(session);
+        int userId = userSession.getId();
+        model.addAttribute("invoiceData", dashboardService.getInvoiceData(userId));
+        model.addAttribute("userData", dashboardService.getUserName(userId));
         model.addAttribute("statsData", dashboardService.getStatsData().get(0));
 
         List<DataPoint> chartData = dashboardService.getChartData();
