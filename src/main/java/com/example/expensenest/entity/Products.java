@@ -1,10 +1,20 @@
 package com.example.expensenest.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+
 public class Products {
+
+    private static String UPLOAD_DIR = "src/main/resources/static/images/user-uploads";
+
     private int id;
     private String name;
     private double price;
-    private Category category;
+    private int category;
+
+    private MultipartFile imageFile;
     private String image;
 
     public int getId() {
@@ -31,11 +41,11 @@ public class Products {
         this.price = price;
     }
 
-    public Category getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
@@ -45,5 +55,30 @@ public class Products {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
+    }
+
+    public void storeAndProcessImage () {
+        MultipartFile file = getImageFile();
+        if (!file.isEmpty()) {
+            try {
+                File uploadDir = new File(UPLOAD_DIR);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
+                }
+                File uploadedFile = new File(uploadDir.getAbsolutePath(), file.getOriginalFilename());
+                file.transferTo(uploadedFile);
+                this.setImage("/images/user-uploads/" + file.getOriginalFilename());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
