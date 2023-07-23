@@ -32,10 +32,10 @@ public class EditProfileController {
 
     @PostMapping("/user/edit")
     public String createUser(@ModelAttribute("user") User user, Model model) {
-        try{
-            userService.updateUser(user);
+        if(userService.updateUser(user)){
             model.addAttribute("successMessage", "Changes saved successfully!");
-        }catch (Exception ex){
+        }
+        else{
             model.addAttribute("errorMessage", "Something went wrong.");
         }
         return "editCustomerProfile";
