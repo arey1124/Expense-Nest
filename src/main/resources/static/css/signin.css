@@ -92,10 +92,15 @@ nav {
     bottom: 0;
 }
 
-#signUpButton{
-color: #CA6B26;
+.sign-up h6 {
+
+/*color: #CA6B26;*/
+margin-top: 15px;
+margin-bottom: 10px;
 }
 
-.d-flex {
-    margin-top: -20px;
+.signUpLinks {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }

@@ -3,9 +3,10 @@ body {
 }
 
 .form {
-    width: 343px;
-    height: 462px;
-    margin: 10% auto;
+     width: 350px;
+     height: 470px;
+     margin: 5% auto;
+     margin-top: -30px;
 }
 
 .form_title {
@@ -15,8 +16,8 @@ body {
     font-size: 64px;
     line-height: 80px;
     text-align: center;
-
     color: #CA8826;
+    margin-top: 25px;
 }
 
 .input-group > input {
@@ -68,9 +69,9 @@ body {
     padding: 10px;
 }
 
-.login-redirect > a {
+.login-redirect > div > a {
     color: #CA6B26;
-    text-decoration: none;
+    /*text-decoration: none;*/
 }
 
 .bottom {
