@@ -37,6 +37,8 @@ public class SellerDashboardController {
 
     @GetMapping("/seller/dashboard")
     public String getSellerDashboard (HttpServletRequest request, HttpSession session, Model model) {
+        User userSession = sessionService.getSession(session);
+        model.addAttribute("user", userSession);
         return "sellerDashboard";
     }
 
