@@ -35,18 +35,6 @@ nav.menu_items {
     list-style: none;
 }
 
-/* .menu_items li a {
-    display: flex;
-    align-items: center;
-    height: 30px;
-    text-decoration: none;
-}
-
-.menu_items li a .link_name {
-    font-size: 1.1em;
-    font-weight: 400;
-} */
-
 .menu_items li a {
     height: 30px;
     display: flex;
@@ -57,16 +45,20 @@ nav.menu_items {
     padding-left: 7px;
 }
 
-.menu_items li a:hover, ul li.active{
+.ul li.active{
     margin-right: 40px;
     background-color: rgb(242, 193, 102);
     border-radius: 7px;
     font-weight: 600;
 }
 
-/* Style for the active tab */
+.menu_items li a:hover{
+ background-color: rgb(242, 193, 102);
+    border-radius: 7px;
+}
+
 .nav_links li a.active {
-    color: #FF0000; /* Set the desired color for the active tab */
+    color: #FF0000;
 }
 
 .logout_btn {
