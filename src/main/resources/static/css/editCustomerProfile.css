@@ -84,16 +84,21 @@ nav.menu_items {
     padding-left: 7px;
 }
 
-.menu_items li a:hover, ul li:nth-child(5){
+.ul li.active{
     margin-right: 40px;
     background-color: rgb(242, 193, 102);
     border-radius: 7px;
     font-weight: 600;
 }
 
-/* Style for the active tab */
+.menu_items li a:hover{
+ background-color: rgb(242, 193, 102);
+    border-radius: 7px;
+}
+
+
 .nav_links li a.active {
-    color: #FF0000; /* Set the desired color for the active tab */
+    color: #FF0000;
 }
 
 .logout_btn {
