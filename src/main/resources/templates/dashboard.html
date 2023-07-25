@@ -33,7 +33,7 @@
             </i>&nbsp; Hello,
                 <span class="text" th:text="${userData}"></span>
             </li>
-            <li class="active"><a href="/dashboard"><i class="material-symbols-outlined">dashboard</i>&nbsp; Dashboard</a></li>
+            <li><a href="/dashboard" class="active"><i class="material-symbols-outlined">dashboard</i>&nbsp; Dashboard</a></li>
             <li><a href="/invoices"><i class="material-symbols-outlined">
                 receipt_long
             </i>&nbsp; All invoices</a></li>
@@ -98,7 +98,7 @@
         data: {
             labels: labels,
             datasets: [{
-                label: 'Quantity and Price',
+                label: 'Quantity bought at a specific Price',
                 data: values,
                 borderColor: 'blue',
                 backgroundColor: 'rgba(0, 0, 255, 0.1)',
@@ -124,7 +124,7 @@
         data: {
             labels: date,
             datasets: [{
-                label: 'Total Amount and Date',
+                label: 'Total Amount Spent at a particular Date',
                 data: totalAmount,
                 borderColor: 'blue',
                 backgroundColor: 'rgba(0, 0, 255, 0.1)',
@@ -151,7 +151,7 @@
         data: {
             labels: Name,
             datasets: [{
-                label: 'Company and Total Spent',
+                label: 'Total Amount spent on each company',
                 data: sumAmount,
                 borderColor: 'blue',
                 backgroundColor: 'rgba(0, 0, 255, 0.1)',
