@@ -27,7 +27,7 @@ public class DashboardServiceImpl implements DashboardService {
         };
 
         // Fetch data
-        String userName = jdbcTemplate.query("SELECT * FROM User WHERE id = ?", userRowMapper, userId).get(0);
+        String userName = jdbcTemplate.query("SELECT SUBSTRING(name, 1, 1) AS name FROM User WHERE id =" + userId, userRowMapper).get(0);
 
         return userName;
     }
@@ -80,7 +80,7 @@ public class DashboardServiceImpl implements DashboardService {
         };
 
         // Fetch data
-        List<DataPoint> chartData = jdbcTemplate.query("SELECT t1.price, t2.quantity FROM products t1 JOIN receiptitems t2 ON t1.id = t2.productId", dataPointRowMapper);
+        List<DataPoint> chartData = jdbcTemplate.query("SELECT t1.price, t2.quantity FROM products t1 JOIN receiptitems t2 ON t1.id = t2.productId LIMIT 5", dataPointRowMapper);
 
         return chartData;
     }
@@ -94,7 +94,7 @@ public class DashboardServiceImpl implements DashboardService {
             };
 
             // Fetch data
-            List<DataPoint> barData = jdbcTemplate.query("SELECT totalAmount, dateOfPurchase FROM receipt", barRowMapper);
+            List<DataPoint> barData = jdbcTemplate.query("SELECT totalAmount, dateOfPurchase FROM receipt LIMIT 5", barRowMapper);
 
             return barData;
     }
@@ -107,7 +107,7 @@ public class DashboardServiceImpl implements DashboardService {
         };
 
         // Fetch data
-        List<DataPoint> pieData = jdbcTemplate.query("SELECT c.name, SUM(r.totalAmount) AS totalAmount FROM company c JOIN receipt r ON c.id = r.sellerId GROUP BY c.name", pieRowMapper);
+        List<DataPoint> pieData = jdbcTemplate.query("SELECT c.name, SUM(r.totalAmount) AS totalAmount FROM company c JOIN receipt r ON c.id = r.sellerId GROUP BY c.name LIMIT 5", pieRowMapper);
 
         return pieData;
     }
