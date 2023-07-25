@@ -44,14 +44,18 @@ public class SellerDashboardController {
 
     @GetMapping("/manage/category")
     public String getCategories (HttpServletRequest request, HttpSession session, Model model) {
+        User userSession = sessionService.getSession(session);
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("user", userSession);
         return "categories";
     }
 
     @GetMapping("/add/category")
     public String addCategories (HttpServletRequest request, HttpSession session, Model model) {
+        User userSession = sessionService.getSession(session);
         model.addAttribute("categoryTypes", CategoryType.values());
         model.addAttribute("category", new Category());
+        model.addAttribute("user", userSession);
         return "addCategory";
     }
 
@@ -64,6 +68,8 @@ public class SellerDashboardController {
 
     @GetMapping("/category/{categoryId}")
     public String getProductsByCategory (HttpServletRequest request, HttpSession session, Model model, @PathVariable(value="categoryId") String categoryId) {
+        User userSession = sessionService.getSession(session);
+        model.addAttribute("user", userSession);
         Category category = categoryService.getCategoryById(Integer.valueOf(categoryId));
         model.addAttribute("category", category);
         model.addAttribute("products", productService.getProductsByCategory(Integer.valueOf(categoryId)));
@@ -72,6 +78,8 @@ public class SellerDashboardController {
 
     @GetMapping("/add/product")
     public String addNewProduct (HttpServletRequest request, HttpSession session, Model model) {
+        User userSession = sessionService.getSession(session);
+        model.addAttribute("user", userSession);
         model.addAttribute("categoryTypes", categoryService.getAllCategories());
         model.addAttribute("product", new Products());
         return "addProduct";
