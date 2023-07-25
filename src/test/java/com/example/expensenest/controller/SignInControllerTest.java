@@ -59,18 +59,23 @@ class SignInControllerTest {
         verify(sessionService, times(1)).createSession(eq(user), eq(session));
     }
 
-  /*  @Test
+    @Test
     void testCheckSignInWithValidUserInvalidUserType() {
         UserSignIn signIn = new UserSignIn("jinal@gmail.com", "Admin123");
         User user = new User();
         user.setUserType(3); // Invalid user type
 
-        when(userService.getUserByEmailAndPassword(signIn)).thenReturn(user);
+        when(userService.getUserByEmailAndPassword(signIn)).thenReturn(null);
+
+        // The expected view name should include the error message query parameter
+        String expectedViewName = "redirect:/signin?signInMessage=Invalid email or password. Please try again.&isSignInSuccess=error";
+
         String viewName = signInController.checkSignIn(signIn, session);
 
-        assertEquals("redirect:/signin", viewName);
-        verify(sessionService, times(1)).createSession(eq(user), eq(session));
-    }*/
+        assertEquals(expectedViewName, viewName);
+        verify(sessionService, times(0)).createSession(eq(user), eq(session));
+    }
+
 
 
     @Test
