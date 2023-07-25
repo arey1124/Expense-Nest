@@ -51,7 +51,7 @@ public class SignInController {
             } else {
                 logger.info("Redirecting user {} to /dashboard", user.getEmail());
                 // TODO: Redirect to seller dashboard
-                return "redirect:/dashboard";
+                return "redirect:/seller/dashboard";
             }
         } else {
             logger.info("Invalid email or password for login attempt: {}", signIn.getEmail());
