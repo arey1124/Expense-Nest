@@ -61,7 +61,7 @@ public class DashboardServiceImpl implements DashboardService {
         };
 
         // Fetch data
-        List<DataPoint> chartData = jdbcTemplate.query("SELECT t1.price, t2.quantity FROM products t1 JOIN receiptitems t2 ON t1.id = t2.productId LIMIT 5", dataPointRowMapper);
+        List<DataPoint> chartData = jdbcTemplate.query("SELECT t1.price, t2.quantity FROM products t1 RIGHT JOIN receiptitems t2 ON t1.id = t2.productId LIMIT 5", dataPointRowMapper);
 
         return chartData;
     }
