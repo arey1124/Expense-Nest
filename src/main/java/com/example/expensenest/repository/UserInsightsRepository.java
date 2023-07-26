@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,6 @@ public class UserInsightsRepository {
     public UserInsightResponse getUserInsightResponse(int sellerId) {
 
         UserInsightResponse userInsightResponse = new UserInsightResponse();
-
 
         //Category Chart
         var categoryChartData = getCategoryChartData(sellerId);

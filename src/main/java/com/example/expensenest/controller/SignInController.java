@@ -49,7 +49,7 @@ public class SignInController {
                 logger.info("Redirecting user {} to /dashboard", user.getEmail());
                 return "redirect:/dashboard";
             } else {
-                logger.info("Redirecting user {} to /dashboard", user.getEmail());
+                logger.info("Redirecting user {} to /seller/dashboard", user.getEmail());
                 return "redirect:/seller/dashboard";
             }
         } else {
