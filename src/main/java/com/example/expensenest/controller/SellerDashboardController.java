@@ -1,13 +1,11 @@
 package com.example.expensenest.controller;
 
 import com.example.expensenest.entity.Category;
+import com.example.expensenest.entity.DataPoint;
 import com.example.expensenest.entity.Products;
 import com.example.expensenest.entity.User;
 import com.example.expensenest.enums.CategoryType;
-import com.example.expensenest.service.CategoryService;
-import com.example.expensenest.service.InvoiceService;
-import com.example.expensenest.service.ProductService;
-import com.example.expensenest.service.SessionService;
+import com.example.expensenest.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -18,27 +16,46 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class SellerDashboardController {
 
     private InvoiceService invoiceService;
     private SessionService sessionService;
-
+    private UserService userService;
     private CategoryService categoryService;
     private ProductService productService;
+    private DashboardService sellerdashboardService;
 
-    public SellerDashboardController(InvoiceService invoiceService, SessionService sessionService,
+    public SellerDashboardController(InvoiceService invoiceService,UserService userService, DashboardService sellerdashboardService, SessionService sessionService,
                                      CategoryService categoryService, ProductService productService) {
         this.invoiceService = invoiceService;
         this.sessionService = sessionService;
         this.categoryService = categoryService;
         this.productService = productService;
+        this.sellerdashboardService = sellerdashboardService;
+        this.userService= userService;
     }
 
     @GetMapping("/seller/dashboard")
     public String getSellerDashboard (HttpServletRequest request, HttpSession session, Model model) {
         User userSession = sessionService.getSession(session);
+
         model.addAttribute("user", userSession);
+
+        int sellerId = userSession.getId();
+        List<DataPoint> sevenData = sellerdashboardService.getSevenData(sellerId);
+        model.addAttribute("sevenData", sevenData);
+
+        List<DataPoint> compareData = sellerdashboardService.getCompareData(sellerId);
+        model.addAttribute("compareData", compareData);
+
+        List<DataPoint> weekData = sellerdashboardService.getWeekData(sellerId);
+        model.addAttribute("weekData", weekData);
+
+        List<DataPoint> yesterdayData = sellerdashboardService.getYesterdayData(sellerId);
+        model.addAttribute("yesterdayData", yesterdayData);
         return "sellerDashboard";
     }
 
