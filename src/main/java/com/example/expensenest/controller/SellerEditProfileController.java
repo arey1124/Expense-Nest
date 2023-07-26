@@ -30,10 +30,8 @@ public class SellerEditProfileController {
         User userSession = sessionService.getSession(session);
         model.addAttribute("user", userSession);
 
-        // Log user details
         logger.debug("User session details: {}", userSession);
 
-        // Log session attributes
         logger.debug("Session attributes: {}", session.getAttributeNames());
 
         User profile = userService.getUserProfile(userSession.getId());
@@ -50,7 +48,6 @@ public class SellerEditProfileController {
     public String saveProfile(@ModelAttribute("user") User user, Model model) {
         logger.info("Handling POST request for /saveSeller");
 
-        // Log user details from the form
         logger.debug("User details from form: {}", user);
 
         boolean saved = userService.setUserProfile(user);
