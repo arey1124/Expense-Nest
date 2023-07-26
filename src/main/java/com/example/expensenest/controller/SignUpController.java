@@ -39,12 +39,19 @@ public class SignUpController {
         if (code == null) {
             logger.info("Handling user exists condition");
             model.addAttribute("userExists",true);
-            return "/signup";
+            model.addAttribute("existsMessage", "User already exists, please sign in!");
+
         } else {
-            logger.info("Sending email for user verification");
-            emailSenderService.sendVerificationEmail(user.getEmail(),"Please verify your email","Click the following link to verify your email", code);
+            boolean sent = emailSenderService.sendVerificationEmail(user.getEmail(),"Please verify your email","Click the following link to verify your email", code);
+            if (sent) {
+                logger.info("Verification email sent: {}", user);
+                model.addAttribute("successMessage", "Verification email sent!");
+            } else {
+                logger.error("Error occurred while sending email: {}", user);
+                model.addAttribute("errorMessage", "Error occurred while sending email");
+            }
             model.addAttribute("user",user);
-            return "/signup";
         }
+        return "signup";
     }
 }
