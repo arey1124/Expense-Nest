@@ -50,13 +50,18 @@ public class SellerEditProfileController {
 
         logger.debug("User details from form: {}", user);
 
-        boolean saved = userService.setUserProfile(user);
-        if (saved) {
-            logger.info("User profile saved successfully: {}", user);
-            model.addAttribute("successMessage", "Profile saved successfully!");
+        if (!user.getName().isEmpty() && !user.getPhoneNumber().isEmpty()) {
+            boolean saved = userService.setUserProfile(user);
+            if (saved) {
+                logger.info("User profile saved successfully: {}", user);
+                model.addAttribute("successMessage", "Profile saved successfully!");
+            } else {
+                logger.error("Error occurred while saving the profile: {}", user);
+                model.addAttribute("errorMessage", "Error occurred while saving the profile.");
+            }
         } else {
-            logger.error("Error occurred while saving the profile: {}", user);
-            model.addAttribute("errorMessage", "Error occurred while saving the profile.");
+            logger.error("Name or phone number cannot be empty: {}", user);
+            model.addAttribute("errorMessage", "Name and Contact Number cannot be empty.");
         }
         return "editProfile";
     }
