@@ -6,10 +6,7 @@ import com.example.expensenest.entity.Category;
 import com.example.expensenest.entity.Products;
 import com.example.expensenest.entity.User;
 import com.example.expensenest.enums.CategoryType;
-import com.example.expensenest.service.CategoryService;
-import com.example.expensenest.service.InvoiceService;
-import com.example.expensenest.service.ProductService;
-import com.example.expensenest.service.SessionService;
+import com.example.expensenest.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,6 +33,8 @@ class SellerDashboardControllerTest {
     private SessionService sessionService;
     private CategoryService categoryService;
     private ProductService productService;
+    private UserService userService;
+    private DashboardService sellerDashboardService;
 
     @BeforeEach
     void setUp() {
@@ -44,8 +43,10 @@ class SellerDashboardControllerTest {
         sessionService = mock(SessionService.class);
         categoryService = mock(CategoryService.class);
         productService = mock(ProductService.class);
+        userService = mock(UserService.class);
+        sellerDashboardService = mock(DashboardService.class);
 
-        sellerDashboardController = new SellerDashboardController(invoiceService, sessionService, categoryService, productService);
+        sellerDashboardController = new SellerDashboardController(invoiceService, userService, sellerDashboardService, sessionService, categoryService, productService);
         mockMvc = MockMvcBuilders.standaloneSetup(sellerDashboardController).build();
     }
 

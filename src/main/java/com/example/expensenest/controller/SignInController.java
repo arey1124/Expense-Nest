@@ -50,7 +50,6 @@ public class SignInController {
                 return "redirect:/dashboard";
             } else {
                 logger.info("Redirecting user {} to /dashboard", user.getEmail());
-                // TODO: Redirect to seller dashboard
                 return "redirect:/seller/dashboard";
             }
         } else {
