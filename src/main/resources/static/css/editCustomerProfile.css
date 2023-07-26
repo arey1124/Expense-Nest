@@ -42,7 +42,7 @@ ul li:nth-child(5) {
     border-radius: 7px;
 }
 
-.active {
+li a.active {
     background-color: rgb(242, 193, 102);
     border-radius: 7px;
     font-weight: 600;
@@ -80,6 +80,11 @@ label {
  .form-control {
             width: 100%;
             margin-block-end: 15px;
+}
+
+.readonly {
+    background-color: #f2f2f2;
+    cursor: not-allowed;
 }
 
 .buttons{

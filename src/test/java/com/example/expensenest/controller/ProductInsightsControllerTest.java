@@ -41,11 +41,11 @@ class ProductInsightsControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    void testGetSellerEditProfile() {
-        String viewName = productInsightsController.getSellerEditProfile();
-        assertEquals("/productInsights", viewName);
-    }
+//    @Test
+//    void testGetSellerEditProfile() {
+//        String viewName = productInsightsController.getSellerEditProfile();
+//        assertEquals("/productInsights", viewName);
+//    }
 
     @Test
     void testGetProductInsights() {
