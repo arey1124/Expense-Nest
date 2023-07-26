@@ -29,6 +29,7 @@ public class SellerEditProfileController {
     public String getSellerEditProfile(Model model, HttpServletRequest httpServletRequest, HttpSession session) {
         logger.info("Handling GET request for /editSeller");
         User userSession = sessionService.getSession(session);
+        model.addAttribute("user", userSession);
 
         // Log user details
         logger.debug("User session details: {}", userSession);

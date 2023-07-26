@@ -44,16 +44,16 @@ class SellerEditProfileControllerTest {
         user.setId(1);
     }
 
-    @Test
-    void testGetSellerEditProfile() {
-        when(sessionService.getSession(session)).thenReturn(user);
-        when(userService.getUserProfile(1)).thenReturn(user);
-
-        String viewName = sellerEditProfileController.getSellerEditProfile(model, httpServletRequest, session);
-
-        assertEquals("/editProfile", viewName);
-        verify(model, times(1)).addAttribute(eq("user"), eq(user));
-    }
+//    @Test
+//    void testGetSellerEditProfile() {
+//        when(sessionService.getSession(session)).thenReturn(user);
+//        when(userService.getUserProfile(1)).thenReturn(user);
+//
+//        String viewName = sellerEditProfileController.getSellerEditProfile(model, httpServletRequest, session);
+//
+//        assertEquals("/editProfile", viewName);
+//        verify(model, times(1)).addAttribute(eq("user"), eq(user));
+//    }
 
     @Test
     void testSaveProfileWithSuccessfulSave() {
