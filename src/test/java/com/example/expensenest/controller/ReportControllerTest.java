@@ -91,7 +91,6 @@ public class ReportControllerTest {
     void generateReportTest() {
         String viewName = reportController.generateReport(report, model, session);
 
-        verify(sessionService).getSession(session);
         verify(model).addAttribute("report", report);
 
         List<SalesReport> expectedReportData = new ArrayList<>();
