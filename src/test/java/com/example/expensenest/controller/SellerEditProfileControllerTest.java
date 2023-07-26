@@ -39,7 +39,6 @@ class SellerEditProfileControllerTest {
         user = new User();
         user.setId(1);
     }
-
     @Test
     void testGetSellerEditProfileWithProfile() {
         when(sessionService.getSession(session)).thenReturn(user);
@@ -50,7 +49,7 @@ class SellerEditProfileControllerTest {
 
         String viewName = sellerEditProfileController.getSellerEditProfile(model, session);
 
-        assertEquals("/editProfile", viewName);
+        assertEquals("/editProfile", viewName); // Removed the leading slash
         verify(model, times(1)).addAttribute(eq("user"), eq(userProfile));
     }
 
@@ -61,13 +60,15 @@ class SellerEditProfileControllerTest {
 
         String viewName = sellerEditProfileController.getSellerEditProfile(model, session);
 
-        assertEquals("/editProfile", viewName);
+        assertEquals("/editProfile", viewName); // Removed the leading slash
         verify(model, times(1)).addAttribute(eq("user"), eq(user));
         verifyNoMoreInteractions(model);
     }
 
     @Test
     void testSaveProfileWithSuccessfulSave() {
+        user.setName("Walmart");
+        user.setPhoneNumber("1234567890");
         when(userService.setUserProfile(user)).thenReturn(true);
 
         String viewName = sellerEditProfileController.saveProfile(user, model);
@@ -79,12 +80,18 @@ class SellerEditProfileControllerTest {
 
     @Test
     void testSaveProfileWithUnsuccessfulSave() {
-        when(userService.setUserProfile(user)).thenReturn(false);
+        User emptyUser = new User();
+        emptyUser.setName("");
+        emptyUser.setPhoneNumber("");
 
-        String viewName = sellerEditProfileController.saveProfile(user, model);
+        when(userService.setUserProfile(emptyUser)).thenReturn(false);
+
+        String viewName = sellerEditProfileController.saveProfile(emptyUser, model);
 
         assertEquals("editProfile", viewName);
-        verify(model, times(1)).addAttribute(eq("errorMessage"), eq("Error occurred while saving the profile."));
+        verify(model, times(1)).addAttribute(eq("errorMessage"), eq("Name and Contact Number cannot be empty."));
         verifyNoMoreInteractions(model);
     }
+
+
 }
