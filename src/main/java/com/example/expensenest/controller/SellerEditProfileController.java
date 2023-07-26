@@ -3,7 +3,6 @@ package com.example.expensenest.controller;
 import com.example.expensenest.entity.User;
 import com.example.expensenest.service.SessionService;
 import com.example.expensenest.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +25,7 @@ public class SellerEditProfileController {
     }
 
     @GetMapping("/editSeller")
-    public String getSellerEditProfile(Model model, HttpServletRequest httpServletRequest, HttpSession session) {
+    public String getSellerEditProfile(Model model, HttpSession session) {
         logger.info("Handling GET request for /editSeller");
         User userSession = sessionService.getSession(session);
         model.addAttribute("user", userSession);
