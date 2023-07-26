@@ -36,7 +36,6 @@ public class DashboardController {
         int userId = userSession.getId();
         model.addAttribute("invoiceData", dashboardService.getInvoiceData(userId));
         model.addAttribute("userData", dashboardService.getUserName(userId));
-        model.addAttribute("statsData", dashboardService.getStatsData().get(0));
 
         List<DataPoint> chartData = dashboardService.getChartData();
         model.addAttribute("chartData", chartData);
