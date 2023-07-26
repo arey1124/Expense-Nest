@@ -1,19 +1,18 @@
 package com.example.expensenest.controller;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 import com.example.expensenest.entity.User;
 import com.example.expensenest.service.SessionService;
 import com.example.expensenest.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import jakarta.servlet.http.HttpSession;
 
 class SellerEditProfileControllerTest {
 
@@ -23,17 +22,14 @@ class SellerEditProfileControllerTest {
     @Mock
     private SessionService sessionService;
 
-    @InjectMocks
-    private SellerEditProfileController sellerEditProfileController;
-
     @Mock
     private Model model;
 
     @Mock
-    private HttpServletRequest httpServletRequest;
-
-    @Mock
     private HttpSession session;
+
+    @InjectMocks
+    private SellerEditProfileController sellerEditProfileController;
 
     private User user;
 
@@ -44,16 +40,31 @@ class SellerEditProfileControllerTest {
         user.setId(1);
     }
 
-//    @Test
-//    void testGetSellerEditProfile() {
-//        when(sessionService.getSession(session)).thenReturn(user);
-//        when(userService.getUserProfile(1)).thenReturn(user);
-//
-//        String viewName = sellerEditProfileController.getSellerEditProfile(model, httpServletRequest, session);
-//
-//        assertEquals("/editProfile", viewName);
-//        verify(model, times(1)).addAttribute(eq("user"), eq(user));
-//    }
+    @Test
+    void testGetSellerEditProfileWithProfile() {
+        when(sessionService.getSession(session)).thenReturn(user);
+
+        User userProfile = new User();
+        userProfile.setId(1);
+        when(userService.getUserProfile(1)).thenReturn(userProfile);
+
+        String viewName = sellerEditProfileController.getSellerEditProfile(model, session);
+
+        assertEquals("/editProfile", viewName);
+        verify(model, times(1)).addAttribute(eq("user"), eq(userProfile));
+    }
+
+    @Test
+    void testGetSellerEditProfileWithNoProfile() {
+        when(sessionService.getSession(session)).thenReturn(user);
+        when(userService.getUserProfile(8)).thenReturn(null);
+
+        String viewName = sellerEditProfileController.getSellerEditProfile(model, session);
+
+        assertEquals("/editProfile", viewName);
+        verify(model, times(1)).addAttribute(eq("user"), eq(user));
+        verifyNoMoreInteractions(model);
+    }
 
     @Test
     void testSaveProfileWithSuccessfulSave() {
@@ -63,7 +74,7 @@ class SellerEditProfileControllerTest {
 
         assertEquals("editProfile", viewName);
         verify(model, times(1)).addAttribute(eq("successMessage"), eq("Profile saved successfully!"));
-        verify(model, never()).addAttribute(eq("errorMessage"), any());
+        verifyNoMoreInteractions(model);
     }
 
     @Test
@@ -74,6 +85,6 @@ class SellerEditProfileControllerTest {
 
         assertEquals("editProfile", viewName);
         verify(model, times(1)).addAttribute(eq("errorMessage"), eq("Error occurred while saving the profile."));
-        verify(model, never()).addAttribute(eq("successMessage"), any());
+        verifyNoMoreInteractions(model);
     }
 }
