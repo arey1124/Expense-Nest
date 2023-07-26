@@ -102,7 +102,7 @@
 <script>
 
  $(document).ready(function () {
-    makeAjaxRequest(); // Call the function on page load to load all charts
+    makeAjaxRequest(); // Calling the function on page load to load all charts
 
   });
 
@@ -135,9 +135,6 @@
 
 // Calling the function to draw the graph when the page loads
  drawSalesChart(userInsightsSalesDataList);
-
-//drawLineGraph(userInsightsSalesDataList);
-//drawLineGraph();
 
     }
   };
@@ -225,7 +222,7 @@ console.log(salesData);
         return `rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255},0.6)`;
       }
 
-      // Chart.js configuration
+
       const config = {
         type: 'line',
         data: {
