@@ -178,7 +178,7 @@ class DashboardControllerTest {
     @Test
     void testEditProfile() {
         // Execute the method
-        String viewName = dashboardController.editProfile();
+        String viewName = dashboardController.editProfile(session);
 
         // Verify the results
         assertEquals("editprofile", viewName);
