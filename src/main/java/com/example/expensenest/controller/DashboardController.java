@@ -86,8 +86,8 @@ public class DashboardController {
     }
 
     @PostMapping("/editProfile")
-    public String editProfile () {
-
+    public String editProfile (HttpSession session) {
+        User userSession = sessionService.getSession(session);
         return "editprofile";
     }
 
