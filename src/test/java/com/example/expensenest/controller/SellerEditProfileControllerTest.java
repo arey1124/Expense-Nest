@@ -71,7 +71,7 @@ class SellerEditProfileControllerTest {
         user.setPhoneNumber("1234567890");
         when(userService.setUserProfile(user)).thenReturn(true);
 
-        String viewName = sellerEditProfileController.saveProfile(user, model);
+        String viewName = sellerEditProfileController.saveProfile(user, model, session);
 
         assertEquals("editProfile", viewName);
         verify(model, times(1)).addAttribute(eq("successMessage"), eq("Profile saved successfully!"));
@@ -86,7 +86,7 @@ class SellerEditProfileControllerTest {
 
         when(userService.setUserProfile(emptyUser)).thenReturn(false);
 
-        String viewName = sellerEditProfileController.saveProfile(emptyUser, model);
+        String viewName = sellerEditProfileController.saveProfile(emptyUser, model, session);
 
         assertEquals("editProfile", viewName);
         verify(model, times(1)).addAttribute(eq("errorMessage"), eq("Name and Contact Number cannot be empty."));

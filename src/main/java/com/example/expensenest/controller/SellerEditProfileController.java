@@ -45,10 +45,13 @@ public class SellerEditProfileController {
     }
 
     @PostMapping("/saveSeller")
-    public String saveProfile(@ModelAttribute("user") User user, Model model) {
+    public String saveProfile(@ModelAttribute("user") User user, Model model, HttpSession session) {
         logger.info("Handling POST request for /saveSeller");
 
         logger.debug("User details from form: {}", user);
+
+        User userSession = sessionService.getSession(session);
+        model.addAttribute("user", userSession);
 
         if (!user.getName().isEmpty() && !user.getPhoneNumber().isEmpty()) {
             boolean saved = userService.setUserProfile(user);
