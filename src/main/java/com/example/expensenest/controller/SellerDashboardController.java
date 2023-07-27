@@ -26,7 +26,7 @@ public class SellerDashboardController {
     private ProductService productService;
     private DashboardService sellerdashboardService;
 
-    public SellerDashboardController(InvoiceService invoiceService,UserService userService, DashboardService sellerdashboardService, SessionService sessionService,
+    public SellerDashboardController(DashboardService sellerdashboardService, SessionService sessionService,
                                      CategoryService categoryService, ProductService productService) {
         this.sessionService = sessionService;
         this.categoryService = categoryService;
