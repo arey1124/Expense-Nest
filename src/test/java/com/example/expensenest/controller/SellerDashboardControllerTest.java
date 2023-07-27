@@ -28,25 +28,20 @@ class SellerDashboardControllerTest {
 
     private MockMvc mockMvc;
     private SellerDashboardController sellerDashboardController;
-
-    private InvoiceService invoiceService;
     private SessionService sessionService;
     private CategoryService categoryService;
     private ProductService productService;
-    private UserService userService;
     private DashboardService sellerDashboardService;
 
     @BeforeEach
     void setUp() {
         // Create mocks for services
-        invoiceService = mock(InvoiceService.class);
         sessionService = mock(SessionService.class);
         categoryService = mock(CategoryService.class);
         productService = mock(ProductService.class);
-        userService = mock(UserService.class);
         sellerDashboardService = mock(DashboardService.class);
 
-        sellerDashboardController = new SellerDashboardController(invoiceService, userService, sellerDashboardService, sessionService, categoryService, productService);
+        sellerDashboardController = new SellerDashboardController(sellerDashboardService, sessionService, categoryService, productService);
         mockMvc = MockMvcBuilders.standaloneSetup(sellerDashboardController).build();
     }
 
