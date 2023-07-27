@@ -65,8 +65,10 @@ public class SellerEditProfileController {
         }
 
         User userSession = sessionService.getSession(session);
-        User userInfo = userService.getUserProfile(userSession.getId());
-        model.addAttribute("user", userInfo);
+        if(userSession != null) {
+            User userInfo = userService.getUserProfile(userSession.getId());
+            model.addAttribute("user", userInfo);
+        }
 
         return "editProfile";
     }
