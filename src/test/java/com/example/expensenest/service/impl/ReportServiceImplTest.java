@@ -32,17 +32,10 @@ class ReportServiceImplTest {
         String startDate = "2023-01-01";
         String endDate = "2023-01-31";
 
-        // Mock the data returned by the repository
         List<SalesReport> mockSalesReports = new ArrayList<>();
-        // Add some mock SalesReport objects to the list
-
         when(mockReportRepository.getSalesReportBySellerID(sellerId, startDate, endDate))
                 .thenReturn(mockSalesReports);
-
-        // Call the service method
         List<SalesReport> result = reportService.getSalesReportData(sellerId, startDate, endDate);
-
-        // Assert the result
         assertEquals(mockSalesReports, result);
     }
 }
