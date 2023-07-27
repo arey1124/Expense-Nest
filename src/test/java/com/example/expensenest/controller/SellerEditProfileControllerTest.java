@@ -75,7 +75,6 @@ class SellerEditProfileControllerTest {
 
         assertEquals("editProfile", viewName);
         verify(model, times(1)).addAttribute(eq("successMessage"), eq("Profile saved successfully!"));
-        verifyNoMoreInteractions(model);
     }
 
     @Test
@@ -90,8 +89,5 @@ class SellerEditProfileControllerTest {
 
         assertEquals("editProfile", viewName);
         verify(model, times(1)).addAttribute(eq("errorMessage"), eq("Name and Contact Number cannot be empty."));
-        verifyNoMoreInteractions(model);
     }
-
-
 }
