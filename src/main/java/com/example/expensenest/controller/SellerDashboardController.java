@@ -21,21 +21,17 @@ import java.util.List;
 @Controller
 public class SellerDashboardController {
 
-    private InvoiceService invoiceService;
     private SessionService sessionService;
-    private UserService userService;
     private CategoryService categoryService;
     private ProductService productService;
     private DashboardService sellerdashboardService;
 
     public SellerDashboardController(InvoiceService invoiceService,UserService userService, DashboardService sellerdashboardService, SessionService sessionService,
                                      CategoryService categoryService, ProductService productService) {
-        this.invoiceService = invoiceService;
         this.sessionService = sessionService;
         this.categoryService = categoryService;
         this.productService = productService;
         this.sellerdashboardService = sellerdashboardService;
-        this.userService= userService;
     }
 
     @GetMapping("/seller/dashboard")
@@ -110,7 +106,9 @@ public class SellerDashboardController {
     }
 
     @PostMapping("/category/{categoryId}")
-    public String searchProducts (Model model,@PathVariable(value="categoryId") String categoryId, @ModelAttribute("queryString") String queryString) {
+    public String searchProducts (Model model, HttpSession session, @PathVariable(value="categoryId") String categoryId, @ModelAttribute("queryString") String queryString) {
+        User userSession = sessionService.getSession(session);
+        model.addAttribute("user", userSession);
         Category category = categoryService.getCategoryById(Integer.valueOf(categoryId));
         model.addAttribute("category", category);
         model.addAttribute("products", productService.searchProductsByQuery(Integer.valueOf(categoryId), queryString));
