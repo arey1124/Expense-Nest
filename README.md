@@ -63,21 +63,18 @@ Thorough unit testing and integration testing have been performed to validate in
 
 ## Screenshots
 
-![Screenshot 2024-01-13 221519](https://github.com/arey1124/Expense-Nest/assets/9376072/795166c5-b0fe-4f5f-aa26-a10aed478dad)
+<img src="https://github.com/arey1124/Expense-Nest/assets/9376072/795166c5-b0fe-4f5f-aa26-a10aed478dad" alt="Screenshot 2024-01-13 221519" width="700"/>
 
-![Screenshot 2024-01-13 221527](https://github.com/arey1124/Expense-Nest/assets/9376072/e3295b5b-dd5a-4aff-8e3b-2b02e4c0bd28)
+<img src="https://github.com/arey1124/Expense-Nest/assets/9376072/e3295b5b-dd5a-4aff-8e3b-2b02e4c0bd28" alt="Screenshot 2024-01-13 221554" width="700"/>
 
-![Screenshot 2024-01-13 221554](https://github.com/arey1124/Expense-Nest/assets/9376072/74e02140-198a-4a0e-87a9-7f1e29ab9ae2)
+<img src="https://github.com/arey1124/Expense-Nest/assets/9376072/74e02140-198a-4a0e-87a9-7f1e29ab9ae2" alt="Screenshot 2024-01-13 221626" width="700"/>
 
-![Screenshot 2024-01-13 221626](https://github.com/arey1124/Expense-Nest/assets/9376072/2a35d2fd-5e79-4a05-b7f9-0e19a97c725f)
+<img src="https://github.com/arey1124/Expense-Nest/assets/9376072/2a35d2fd-5e79-4a05-b7f9-0e19a97c725f" alt="Screenshot 2024-01-13 221646" width="700"/>
 
-![Screenshot 2024-01-13 221646](https://github.com/arey1124/Expense-Nest/assets/9376072/ec803051-0c4a-42a3-9cf2-f3adc1296284)
+<img src="https://github.com/arey1124/Expense-Nest/assets/9376072/ec803051-0c4a-42a3-9cf2-f3adc1296284" alt="Screenshot 2024-01-13 221713" width="700"/>
 
-![Screenshot 2024-01-13 221713](https://github.com/arey1124/Expense-Nest/assets/9376072/920614f7-057f-493c-a585-496cb5098b96)
+<img src="https://github.com/arey1124/Expense-Nest/assets/9376072/920614f7-057f-493c-a585-496cb5098b96" alt="Screenshot 2024-01-13 221734" width="700"/>
 
-![Screenshot 2024-01-13 221734](https://github.com/arey1124/Expense-Nest/assets/9376072/5f0bd7ce-ab5e-41ff-a223-0112bc79ee56)
+<img src="https://github.com/arey1124/Expense-Nest/assets/9376072/5f0bd7ce-ab5e-41ff-a223-0112bc79ee56" alt="Screenshot 2024-01-13 221745" width="700"/>
 
-![Screenshot 2024-01-13 221745](https://github.com/arey1124/Expense-Nest/assets/9376072/b21bae34-9690-4a08-8e2b-8db708f9459b)
-
-
-
+<img src="https://github.com/arey1124/Expense-Nest/assets/9376072/b21bae34-9690-4a08-8e2b-8db708f9459b" alt="Screenshot 2024-01-13 221745" width="700"/>
