@@ -61,8 +61,23 @@ The system is deployed on AWS cloud platforms, providing scalability, cost-effec
 
 Thorough unit testing and integration testing have been performed to validate individual components and ensure seamless interactions between different modules. This meticulous testing ensures a stable and bug-free environment for a positive user experience.
 
-## Contribution Guidelines 🤝
+## Screenshots
 
-Feel free to explore, contribute, and enhance the ExpenseNest application. Your commitment to quality and security is crucial for the success of this project. Happy coding! 🚀
+![Screenshot 2024-01-13 221519](https://github.com/arey1124/Expense-Nest/assets/9376072/795166c5-b0fe-4f5f-aa26-a10aed478dad)
 
-For detailed information on how to contribute, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+![Screenshot 2024-01-13 221527](https://github.com/arey1124/Expense-Nest/assets/9376072/e3295b5b-dd5a-4aff-8e3b-2b02e4c0bd28)
+
+![Screenshot 2024-01-13 221554](https://github.com/arey1124/Expense-Nest/assets/9376072/74e02140-198a-4a0e-87a9-7f1e29ab9ae2)
+
+![Screenshot 2024-01-13 221626](https://github.com/arey1124/Expense-Nest/assets/9376072/2a35d2fd-5e79-4a05-b7f9-0e19a97c725f)
+
+![Screenshot 2024-01-13 221646](https://github.com/arey1124/Expense-Nest/assets/9376072/ec803051-0c4a-42a3-9cf2-f3adc1296284)
+
+![Screenshot 2024-01-13 221713](https://github.com/arey1124/Expense-Nest/assets/9376072/920614f7-057f-493c-a585-496cb5098b96)
+
+![Screenshot 2024-01-13 221734](https://github.com/arey1124/Expense-Nest/assets/9376072/5f0bd7ce-ab5e-41ff-a223-0112bc79ee56)
+
+![Screenshot 2024-01-13 221745](https://github.com/arey1124/Expense-Nest/assets/9376072/b21bae34-9690-4a08-8e2b-8db708f9459b)
+
+
+
